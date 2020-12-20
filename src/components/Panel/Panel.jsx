@@ -17,7 +17,7 @@ const Panel = () => {
 
   return (
     <>
-      <Box mx={6}>
+      <Box mx="6" mb="6">
         <Flex flexDir="horizontal" wrap="wrap">
           <TaskList title={'Todo.'} tasks={placeholderList}></TaskList>
           <TaskList title={'Doing...'} tasks={placeholderList}></TaskList>

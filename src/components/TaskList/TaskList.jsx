@@ -17,17 +17,18 @@ const TaskList = (props) => {
         borderWidth="1px"
         overflow="hidden"
         borderRadius="lg"
-        p={3}
-        mr={4}
-        mt={4}
+        px="3"
+        pt="3"
+        mr="4"
+        mt="4"
         boxShadow="base"
       >
         <Flex justifyContent="space-between">
-          <Heading as="h1" size="lg" mb={3}>
+          <Heading as="h1" size="lg" mb="3">
             {title}
           </Heading>
           <div>
-            <IconButton aria-label="Edit the list" mr={2} icon={<EditIcon />} />
+            <IconButton aria-label="Edit the list" mr="2" icon={<EditIcon />} />
             <IconButton aria-label="Delete the task" icon={<DeleteIcon />} />
           </div>
         </Flex>

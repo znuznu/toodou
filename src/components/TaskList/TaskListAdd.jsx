@@ -13,6 +13,8 @@ const TaskListAdd = () => {
       mr={4}
       mt={4}
       boxShadow="base"
+      w="auto"
+      h="auto"
     >
       <IconButton aria-label="Delete the task" icon={<AddIcon />} />
     </Box>

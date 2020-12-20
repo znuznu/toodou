@@ -4,18 +4,18 @@ import { Heading } from '@chakra-ui/react';
 
 import PropTypes from 'prop-types';
 
-const Title = (props) => {
-  const { content } = props;
+const Header = (props) => {
+  const { title } = props;
 
   return (
     <Heading as="h1" size="3xl" textAlign={'end'} margin={[25, 0, 0, 25]}>
-      {content}
+      {title}
     </Heading>
   );
 };
 
-Title.propTypes = {
-  content: PropTypes.string.isRequired,
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
-export default Title;
+export default Header;

@@ -1,16 +1,22 @@
 import React from 'react';
 
+import { Provider as ReduxProvider } from 'react-redux';
+
 import { ChakraProvider, theme } from '@chakra-ui/react';
 
 import Panel from './components/Panel/Panel';
-import Title from './components/Title/Title';
+import Header from './components/Header/Header';
+
+import store from './redux/store/store';
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <Title content="Toodou."></Title>
-      <Panel></Panel>
-    </ChakraProvider>
+    <ReduxProvider store={store}>
+      <ChakraProvider theme={theme}>
+        <Header title="Toodou."></Header>
+        <Panel></Panel>
+      </ChakraProvider>
+    </ReduxProvider>
   );
 }
 

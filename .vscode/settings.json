@@ -1,0 +1,14 @@
+{
+    "files.autoSave": "afterDelay",
+    "prettier.configPath": ".prettierrc",
+    "prettier.prettierPath": "node_modules/prettier/",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "prettier.requireConfig": true,
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 2,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+}

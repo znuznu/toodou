@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -7,8 +7,16 @@ import { Heading, IconButton, Flex, Box } from '@chakra-ui/react';
 
 import Task from '../Task/Task';
 
+import {
+  addTaskList,
+  updateTaskListTitle,
+  deleteTaskList,
+} from '../../actions/taskList.action';
+
 const TaskList = (props) => {
-  const { title, tasks } = props;
+  const { boardId } = props;
+
+  const [title, setTitle] = useState('This is a title');
 
   return (
     <>
@@ -27,22 +35,21 @@ const TaskList = (props) => {
           <Heading as="h1" size="lg" mb="3">
             {title}
           </Heading>
-          <div>
+          <Box ml={2}>
             <IconButton aria-label="Edit the list" mr="2" icon={<EditIcon />} />
             <IconButton aria-label="Delete the task" icon={<DeleteIcon />} />
-          </div>
+          </Box>
         </Flex>
-        {tasks.map((content, index) => (
-          <Task key={`${title}-${index}`} content={content}></Task>
-        ))}
+        {/* {taskLists.map((content, index) => (
+          <Task key={`${title}-${index}`}></Task>
+        ))} */}
       </Box>
     </>
   );
 };
 
 TaskList.propTypes = {
-  title: PropTypes.string.isRequired,
-  tasks: PropTypes.array.isRequired,
+  boardId: PropTypes.number.isRequired,
 };
 
 export default TaskList;

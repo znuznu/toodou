@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EditIcon } from '@chakra-ui/icons';
+import { EditIcon, AddIcon } from '@chakra-ui/icons';
 import { Box } from '@chakra-ui/react';
 
 const TaskAdd = () => {
@@ -13,14 +13,7 @@ const TaskAdd = () => {
       mb={3}
       _hover={{ bg: 'gray.50' }}
     >
-      {/* TODO: update Icon */}
-      <EditIcon
-        mb={3}
-        aria-label="Edit the task"
-        cursor="pointer"
-        color="gray.400"
-        _hover={{ color: 'gray.800' }}
-      />
+      <IconButton aria-label="Add a task" icon={<AddIcon />} />
     </Box>
   );
 };

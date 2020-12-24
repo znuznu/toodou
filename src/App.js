@@ -4,17 +4,17 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import { ChakraProvider, theme } from '@chakra-ui/react';
 
-import Panel from './components/Panel/Panel';
+import BoardList from './components/BoardList/BoardList';
 import Header from './components/Header/Header';
 
-import store from './redux/store/store';
+import store from './store/store';
 
 function App() {
   return (
     <ReduxProvider store={store}>
       <ChakraProvider theme={theme}>
         <Header title="Toodou."></Header>
-        <Panel></Panel>
+        <BoardList></BoardList>
       </ChakraProvider>
     </ReduxProvider>
   );

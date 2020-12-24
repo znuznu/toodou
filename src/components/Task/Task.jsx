@@ -1,12 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
-import { Box, Text, Flex } from '@chakra-ui/react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+
+import {
+  ArrowBackIcon,
+  CheckIcon,
+  DeleteIcon,
+  EditIcon,
+} from '@chakra-ui/icons';
+import { Box, Flex, Textarea, Text, SkeletonText } from '@chakra-ui/react';
+
+import { updateTaskContent } from '../../actions/task.action';
 
 import PropTypes from 'prop-types';
 
+const selectTaskFromId = (state, id) => {
+  return state.tasks[id];
+};
+
 const Task = (props) => {
-  const { content } = props;
+  const { id, taskListId } = props;
+
+  const [editMode, setEditMode] = useState({ content: false });
+  const [content, setContent] = useState('');
+
+  const dispatch = useDispatch();
+
+  const task = useSelector(
+    (state) => selectTaskFromId(state, id),
+    shallowEqual
+  );
+
+  const onContentChange = (event) => {
+    setContent(event.target.value);
+  };
+
+  const toggleEditContent = () => {
+    setEditMode({ ...editMode, content: !editMode.content });
+  };
+
+  const onSaveContent = () => {
+    dispatch(updateTaskContent(id, content));
+    toggleEditContent();
+  };
+
+  const TaskRender = () => {
+    return (
+      <Flex justifyContent="space-between">
+        <Text>{task.content}</Text>
+        <Flex flexDir="column">
+          <EditIcon
+            mb={3}
+            aria-label="Edit the task"
+            cursor="pointer"
+            color="gray.400"
+            _hover={{ color: 'gray.800' }}
+            onClick={toggleEditContent}
+          />
+          <DeleteIcon
+            aria-label="Delete the task"
+            cursor="pointer"
+            color="gray.400"
+            _hover={{ color: 'gray.800' }}
+          />
+        </Flex>
+      </Flex>
+    );
+  };
 
   return (
     <Box
@@ -17,30 +77,46 @@ const Task = (props) => {
       mb={3}
       _hover={{ bg: 'gray.50' }}
     >
-      <Flex justifyContent="space-between">
-        <Text>{content}</Text>
-        <Flex flexDir="column">
-          <EditIcon
-            mb={3}
-            aria-label="Edit the task"
-            cursor="pointer"
-            color="gray.400"
-            _hover={{ color: 'gray.800' }}
-          />
-          <DeleteIcon
-            aria-label="Delete the task"
-            cursor="pointer"
-            color="gray.400"
-            _hover={{ color: 'gray.800' }}
-          />
-        </Flex>
-      </Flex>
+      {task ? (
+        editMode.content ? (
+          <Flex justifyContent="space-between">
+            <Textarea
+              placeholder={task.content}
+              value={content}
+              onChange={onContentChange}
+              autoFocus
+            />
+            <Flex flexDir="column" ml="3">
+              <CheckIcon
+                mb={3}
+                aria-label="Save the task"
+                cursor="pointer"
+                color="gray.400"
+                _hover={{ color: 'gray.800' }}
+                onClick={onSaveContent}
+              />
+              <ArrowBackIcon
+                aria-label="Undo editing"
+                cursor="pointer"
+                color="gray.400"
+                _hover={{ color: 'gray.800' }}
+                onClick={toggleEditContent}
+              />
+            </Flex>
+          </Flex>
+        ) : (
+          <TaskRender />
+        )
+      ) : (
+        <SkeletonText />
+      )}
     </Box>
   );
 };
 
 Task.propTypes = {
-  content: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  taskListId: PropTypes.number.isRequired,
 };
 
 export default Task;

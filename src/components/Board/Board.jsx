@@ -8,11 +8,22 @@ import {
 } from '../../actions/board.action';
 import { addTaskList } from '../../actions/taskList.action';
 
-import { getMaxId } from '../../utils/functions';
+import { getMaxId, getNextId } from '../../utils/functions';
 
 import PropTypes from 'prop-types';
 
-import { Flex, Box, Heading, IconButton, Input } from '@chakra-ui/react';
+import {
+  Flex,
+  Box,
+  Heading,
+  IconButton,
+  Input,
+  Text,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  EditableControls,
+} from '@chakra-ui/react';
 import {
   ArrowBackIcon,
   CheckIcon,
@@ -23,16 +34,16 @@ import {
 import TaskList from '../TaskList/TaskList';
 import TaskListAdd from '../TaskList/TaskListAdd';
 
+const selectBoardFromId = (state, id) => {
+  return state.boards[id];
+};
+
+const selectNextTaskListId = (state) => {
+  return getNextId(state.taskLists);
+};
+
 const Board = (props) => {
   const { id, onDelete } = props;
-
-  const selectBoardFromId = (state, id) => {
-    return state.boards[id];
-  };
-
-  const selectLastTaskListId = (state) => {
-    return getMaxId(state.taskLists);
-  };
 
   const board = useSelector(
     (state) => selectBoardFromId(state, id),
@@ -40,7 +51,7 @@ const Board = (props) => {
   );
 
   const lastTaskListId = useSelector(
-    (state) => selectLastTaskListId(state),
+    (state) => selectNextTaskListId(state),
     shallowEqual
   );
 
@@ -63,14 +74,14 @@ const Board = (props) => {
   };
 
   const onAddTaskList = () => {
-    dispatch(addTaskList(`taskLists #${board.taskLists.length + 1}`));
+    dispatch(addTaskList(`Tasks #${board.taskLists.length + 1}`));
     dispatch(addTaskListToBoard(id, lastTaskListId));
   };
 
   const Header = () => {
     return (
       <>
-        {/* <Heading>{board.title}</Heading> */}
+        <Heading>{board && board.title}</Heading>
         <Box>
           <IconButton
             aria-label="Edit the board"
@@ -95,11 +106,12 @@ const Board = (props) => {
           <>
             <Input
               size="lg"
-              placeholder={board.title}
+              placeholder={board && board.title}
               w="50"
               name="title"
               value={title}
               onChange={onTitleChange}
+              autoFocus
             />
             <Box my="auto">
               <IconButton
@@ -120,7 +132,21 @@ const Board = (props) => {
         )}
       </Flex>
       <Flex flexDir="horizontal" wrap="wrap">
-        {/* <TaskList boardId={id}></TaskList> */}
+        {board && board.taskLists.length ? (
+          board.taskLists.map((taskListId) => {
+            return (
+              <TaskList
+                id={taskListId}
+                boardId={id}
+                key={`tlid-${taskListId}`}
+              ></TaskList>
+            );
+          })
+        ) : (
+          <Heading as="em" mt="auto" mr="4">
+            No list found.
+          </Heading>
+        )}
         <TaskListAdd onAddTaskList={onAddTaskList}></TaskListAdd>
       </Flex>
     </>
@@ -133,3 +159,77 @@ Board.propTypes = {
 };
 
 export default Board;
+
+//   const Header = () => {
+//     return (
+//       <>
+//         <Heading>{board && board.title}</Heading>
+//         <Box>
+//           <IconButton
+//             aria-label="Edit the board"
+//             mx="2"
+//             icon={<EditIcon />}
+//             onClick={toggleEditTitle}
+//           />
+//           {/* <IconButton
+//             aria-label="Delete the board"
+//             icon={<DeleteIcon />}
+//             onClick={onDelete}
+//           /> */}
+//         </Box>
+//       </>
+//     );
+//   };
+
+//   return (
+//     <>
+//       <Flex>
+//         {editMode.title ? (
+//           <>
+//             <Input
+//               size="lg"
+//               placeholder={board && board.title}
+//               w="50"
+//               name="title"
+//               value={title}
+//               onChange={onTitleChange}
+//             />
+//             <Box my="auto">
+//               <IconButton
+//                 aria-label="Save the title"
+//                 mx="2"
+//                 icon={<CheckIcon />}
+//                 onClick={onSaveTitle}
+//               />
+//               <IconButton
+//                 aria-label="Undo editing the title"
+//                 icon={<ArrowBackIcon />}
+//                 onClick={toggleEditTitle}
+//               />
+//             </Box>
+//           </>
+//         ) : (
+//           <Header />
+//         )}
+//       </Flex>
+//       <Flex flexDir="horizontal" wrap="wrap">
+//         {board && board.taskLists.length ? (
+//           board.taskLists.map((taskListId) => {
+//             return (
+//               <TaskList
+//                 id={taskListId}
+//                 boardId={id}
+//                 key={`tlid-${taskListId}`}
+//               ></TaskList>
+//             );
+//           })
+//         ) : (
+//           <Heading as="em" mt="auto" mr="4">
+//             No list found.
+//           </Heading>
+//         )}
+//         <TaskListAdd onAddTaskList={onAddTaskList}></TaskListAdd>
+//       </Flex>
+//     </>
+//   );
+// };

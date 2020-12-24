@@ -1,43 +1,39 @@
 import { Types } from '../actions/taskList.action';
-import { getMaxId } from '../utils/functions';
+import { getNextId } from '../utils/functions';
 
 const initialState = {};
-
-function nextTaskListId(taskLists) {
-  // Find the max board id
-  const maxId = getMaxId(taskLists);
-
-  return maxId + 1;
-}
 
 export default function taskListReducer(state = initialState, action) {
   switch (action.type) {
     case Types.ADD:
       return {
         ...state,
-        [nextTaskListId(state)]: {
+        [getNextId(state)]: {
           title: action.payload.title,
-          taskLists: [],
+          tasks: [],
         },
       };
 
     case Types.UPDATE_TITLE:
-      return [
+      return {
         ...state,
-        {
-          id: state,
-          text: action.payload,
+        [action.payload.taskListId]: {
+          ...state[action.payload.taskListId],
+          title: action.payload.title,
         },
-      ];
+      };
 
-    case Types.UPDATE_TITLE:
-      return [
+    case Types.ADD_TASK:
+      return {
         ...state,
-        {
-          id: state,
-          text: action.payload,
+        [action.payload.taskListId]: {
+          title: state[action.payload.taskListId].title,
+          tasks: [
+            ...state[action.payload.taskListId].tasks,
+            action.payload.taskId,
+          ],
         },
-      ];
+      };
 
     default:
       return state;

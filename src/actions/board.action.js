@@ -15,7 +15,7 @@ const addNewBoard = (title) => ({
 
 const updateTitleBoard = (boardId, title) => ({
   type: Types.UPDATE_TITLE,
-  payload: { id: boardId, title },
+  payload: { boardId, title },
 });
 
 const deleteBoard = (boardId) => ({

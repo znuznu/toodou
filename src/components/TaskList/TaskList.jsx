@@ -2,21 +2,118 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
-import { Heading, IconButton, Flex, Box } from '@chakra-ui/react';
-
-import Task from '../Task/Task';
+import {
+  ArrowBackIcon,
+  CheckIcon,
+  DeleteIcon,
+  EditIcon,
+} from '@chakra-ui/icons';
 
 import {
-  addTaskList,
+  Heading,
+  IconButton,
+  Flex,
+  Box,
+  Tooltip,
+  Input,
+} from '@chakra-ui/react';
+
+import Task from '../Task/Task';
+import TaskAdd from '../Task/TaskAdd';
+
+import {
   updateTaskListTitle,
   deleteTaskList,
+  addTaskToTaskList,
 } from '../../actions/taskList.action';
 
-const TaskList = (props) => {
-  const { boardId } = props;
+import { addTask } from '../../actions/task.action';
 
-  const [title, setTitle] = useState('This is a title');
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+
+import { getNextId } from '../../utils/functions';
+
+const selectTaskList = (state, taskListId) => {
+  return state.taskLists[taskListId];
+};
+
+const selectTasks = (state) => {
+  return state.tasks;
+};
+
+const selectNextTaskId = (state) => {
+  return getNextId(state.tasks);
+};
+
+const TaskList = (props) => {
+  const { id, boardId } = props;
+  const [editMode, setEditMode] = useState({ title: false });
+  const [title, setTitle] = useState('');
+
+  // const [title, setTitle] = useState('This is a title');
+
+  const dispatch = useDispatch();
+
+  const taskList = useSelector(
+    (state) => selectTaskList(state, id),
+    shallowEqual
+  );
+
+  const lastTaskId = useSelector(
+    (state) => selectNextTaskId(state),
+    shallowEqual
+  );
+
+  const tasks = useSelector((state) => selectTasks(state, id), shallowEqual);
+
+  const toggleEditTitle = () => {
+    setEditMode({ ...editMode, title: !editMode.title });
+  };
+
+  const onTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const onSaveTitle = () => {
+    dispatch(updateTaskListTitle(id, title));
+    toggleEditTitle();
+  };
+
+  const onAddTask = () => {
+    dispatch(addTask(`A task...`));
+    // Get the next one because not already set in store... :)
+    dispatch(addTaskToTaskList(id, lastTaskId));
+  };
+
+  const TaskListHeader = () => {
+    return (
+      <>
+        <Heading as="h1" size="lg" mb="3">
+          {taskList && taskList.title}
+        </Heading>
+        <Box ml={2}>
+          <IconButton
+            aria-label="Edit the title"
+            mr="2"
+            icon={
+              <Tooltip label="Edit the title" openDelay={500}>
+                <EditIcon />
+              </Tooltip>
+            }
+            onClick={toggleEditTitle}
+          />
+          <IconButton
+            aria-label="Delete the list"
+            icon={
+              <Tooltip label="Delete the list" openDelay={500}>
+                <DeleteIcon />
+              </Tooltip>
+            }
+          />
+        </Box>
+      </>
+    );
+  };
 
   return (
     <>
@@ -32,23 +129,47 @@ const TaskList = (props) => {
         boxShadow="base"
       >
         <Flex justifyContent="space-between">
-          <Heading as="h1" size="lg" mb="3">
-            {title}
-          </Heading>
-          <Box ml={2}>
-            <IconButton aria-label="Edit the list" mr="2" icon={<EditIcon />} />
-            <IconButton aria-label="Delete the task" icon={<DeleteIcon />} />
-          </Box>
+          {editMode.title ? (
+            <>
+              <Input
+                placeholder={taskList && taskList.title}
+                w="50"
+                name="title"
+                value={title}
+                onChange={onTitleChange}
+                autoFocus
+              />
+              <Box my="auto">
+                <IconButton
+                  aria-label="Save the title"
+                  mx="2"
+                  icon={<CheckIcon />}
+                  onClick={onSaveTitle}
+                />
+                <IconButton
+                  aria-label="Undo editing the title"
+                  icon={<ArrowBackIcon />}
+                  onClick={toggleEditTitle}
+                />
+              </Box>
+            </>
+          ) : (
+            <TaskListHeader />
+          )}
         </Flex>
-        {/* {taskLists.map((content, index) => (
-          <Task key={`${title}-${index}`}></Task>
-        ))} */}
+        {taskList &&
+          taskList.tasks &&
+          taskList.tasks.map((taskId) => (
+            <Task key={`task-${taskId}`} id={taskId} taskListId={id}></Task>
+          ))}
+        <TaskAdd onAddTask={onAddTask}></TaskAdd>
       </Box>
     </>
   );
 };
 
 TaskList.propTypes = {
+  id: PropTypes.number.isRequired,
   boardId: PropTypes.number.isRequired,
 };
 

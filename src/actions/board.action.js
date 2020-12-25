@@ -19,9 +19,9 @@ const updateTitleBoard = (boardId, title) => ({
   payload: { boardId, title },
 });
 
-const deleteBoard = (boardId) => ({
+const deleteBoards = (boardIdArray) => ({
   type: Types.DELETE_BOARD,
-  payload: boardId,
+  payload: { boardIdArray },
 });
 
 const addTaskListToBoard = (boardId, taskListId) => ({
@@ -44,7 +44,7 @@ export {
   Types,
   addNewBoard,
   updateTitleBoard,
-  deleteBoard,
+  deleteBoards,
   addTaskListToBoard,
   deleteTaskListsOfBoard,
 };

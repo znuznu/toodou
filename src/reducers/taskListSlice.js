@@ -1,5 +1,5 @@
 import { Types } from '../actions/taskList.action';
-import { getNextId } from '../utils/functions';
+import { filterObject, getNextId } from '../utils/functions';
 
 const initialState = {};
 
@@ -36,15 +36,7 @@ export default function taskListReducer(state = initialState, action) {
       };
 
     case Types.DELETE_MULTIPLE:
-      let newState = {};
-
-      Object.keys(state).forEach((taskListId) => {
-        if (!action.payload.taskListIdArray.includes(Number(taskListId))) {
-          newState[taskListId] = { ...state[taskListId] };
-        }
-      });
-
-      return newState;
+      return filterObject(state, action.payload.taskListIdArray);
 
     case Types.DELETE_TASKS:
       return {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { addNewBoard, deleteBoard } from '../../actions/board.action';
+import { addNewBoard, deleteBoards } from '../../actions/board.action';
 
 import { Box, Flex, Select, Heading } from '@chakra-ui/react';
 
@@ -34,7 +34,7 @@ const BoardList = () => {
   // };
 
   const onDelete = () => {
-    dispatch(deleteBoard(currentBoardId));
+    dispatch(deleteBoards(currentBoardId));
   };
 
   return (

@@ -24,7 +24,6 @@ export default function boardReducer(state = initialState, action) {
       };
 
     case Types.DELETE_BOARD:
-      // Later :)
       return state;
 
     case Types.ADD_TASKLIST:
@@ -34,7 +33,7 @@ export default function boardReducer(state = initialState, action) {
           title: state[action.payload.boardId].title,
           taskLists: [
             ...state[action.payload.boardId].taskLists,
-            action.payload.taskListId, // Splice ?
+            action.payload.taskListId,
           ],
         },
       };

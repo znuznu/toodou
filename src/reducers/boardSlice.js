@@ -39,6 +39,17 @@ export default function boardReducer(state = initialState, action) {
         },
       };
 
+    case Types.DELETE_TASKLISTS:
+      return {
+        ...state,
+        [action.payload.boardId]: {
+          title: state[action.payload.boardId].title,
+          taskLists: state[action.payload.boardId].taskLists.filter(
+            (taskListId) => !action.payload.taskListIdArray.includes(taskListId)
+          ),
+        },
+      };
+
     default:
       return state;
   }

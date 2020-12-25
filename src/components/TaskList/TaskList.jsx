@@ -23,11 +23,12 @@ import TaskAdd from '../Task/TaskAdd';
 
 import {
   updateTaskListTitle,
-  deleteTaskList,
+  deleteTaskLists,
   addTaskToTaskList,
+  deleteTasksOfTaskList,
 } from '../../actions/taskList.action';
-
-import { addTask } from '../../actions/task.action';
+import { addTask, deleteTasks } from '../../actions/task.action';
+import { deleteTaskListsOfBoard } from '../../actions/board.action';
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
@@ -81,8 +82,18 @@ const TaskList = (props) => {
 
   const onAddTask = () => {
     dispatch(addTask(`A task...`));
-    // Get the next one because not already set in store... :)
     dispatch(addTaskToTaskList(id, lastTaskId));
+  };
+
+  const onDelete = () => {
+    dispatch(deleteTasks(taskList.tasks));
+    dispatch(deleteTaskLists([id]));
+    dispatch(deleteTaskListsOfBoard(boardId, [id]));
+  };
+
+  const onClear = () => {
+    dispatch(deleteTasksOfTaskList(id, taskList.tasks));
+    dispatch(deleteTasks(taskList.tasks));
   };
 
   const TaskListHeader = () => {
@@ -109,6 +120,7 @@ const TaskList = (props) => {
                 <DeleteIcon />
               </Tooltip>
             }
+            onClick={onDelete}
           />
         </Box>
       </>

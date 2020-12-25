@@ -8,28 +8,12 @@ import {
 } from '../../actions/board.action';
 import { addTaskList } from '../../actions/taskList.action';
 
-import { getMaxId, getNextId } from '../../utils/functions';
+import { getNextId } from '../../utils/functions';
 
 import PropTypes from 'prop-types';
 
-import {
-  Flex,
-  Box,
-  Heading,
-  IconButton,
-  Input,
-  Text,
-  Editable,
-  EditableInput,
-  EditablePreview,
-  EditableControls,
-} from '@chakra-ui/react';
-import {
-  ArrowBackIcon,
-  CheckIcon,
-  DeleteIcon,
-  EditIcon,
-} from '@chakra-ui/icons';
+import { Flex, Box, Heading, IconButton, Input } from '@chakra-ui/react';
+import { ArrowBackIcon, CheckIcon, EditIcon } from '@chakra-ui/icons';
 
 import TaskList from '../TaskList/TaskList';
 import TaskListAdd from '../TaskList/TaskListAdd';

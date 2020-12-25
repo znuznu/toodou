@@ -35,6 +35,17 @@ export default function taskListReducer(state = initialState, action) {
         },
       };
 
+    case Types.DELETE_MULTIPLE:
+      let newState = {};
+
+      Object.keys(state).forEach((taskListId) => {
+        if (!action.payload.taskListIdArray.includes(Number(taskListId))) {
+          newState[taskListId] = { ...state[taskListId] };
+        }
+      });
+
+      return newState;
+
     case Types.DELETE_TASKS:
       return {
         ...state,

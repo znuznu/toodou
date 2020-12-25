@@ -22,6 +22,17 @@ export default function taskReducer(state = initialState, action) {
         },
       };
 
+    case Types.DELETE_MULTIPLE:
+      let newState = {};
+
+      Object.keys(state).forEach((taskId) => {
+        if (!action.payload.taskIdArray.includes(Number(taskId))) {
+          newState[taskId] = { ...state[taskId] };
+        }
+      });
+
+      return newState;
+
     default:
       return state;
   }

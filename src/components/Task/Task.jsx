@@ -10,12 +10,17 @@ import {
 } from '@chakra-ui/icons';
 import { Box, Flex, Textarea, Text, SkeletonText } from '@chakra-ui/react';
 
-import { updateTaskContent } from '../../actions/task.action';
+import { updateTaskContent, deleteTasks } from '../../actions/task.action';
+import { deleteTasksOfTaskList } from '../../actions/taskList.action';
 
 import PropTypes from 'prop-types';
 
 const selectTaskFromId = (state, id) => {
   return state.tasks[id];
+};
+
+const selectTaskListFromId = (state, id) => {
+  return state.taskLists[id];
 };
 
 const Task = (props) => {
@@ -31,12 +36,22 @@ const Task = (props) => {
     shallowEqual
   );
 
+  const taskList = useSelector(
+    (state) => selectTaskListFromId(state, taskListId),
+    shallowEqual
+  );
+
   const onContentChange = (event) => {
     setContent(event.target.value);
   };
 
   const toggleEditContent = () => {
     setEditMode({ ...editMode, content: !editMode.content });
+  };
+
+  const onDelete = () => {
+    dispatch(deleteTasksOfTaskList(taskListId, [id]));
+    dispatch(deleteTasks([id]));
   };
 
   const onSaveContent = () => {
@@ -62,6 +77,7 @@ const Task = (props) => {
             cursor="pointer"
             color="gray.400"
             _hover={{ color: 'gray.800' }}
+            onClick={onDelete}
           />
         </Flex>
       </Flex>

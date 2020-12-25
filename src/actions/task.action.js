@@ -1,7 +1,7 @@
 const Types = {
   ADD: 'task/add',
   UPDATE_CONTENT: 'task/updateContent',
-  DELETE: 'task/delete',
+  DELETE_MULTIPLE: 'task/deleteMultiple',
 };
 
 const addTask = (content) => ({
@@ -19,13 +19,11 @@ const updateTaskContent = (taskId, content) => ({
   },
 });
 
-const deleteTask = (boardId, taskListId, taskId) => ({
-  type: Types.DELETE,
+const deleteTasks = (taskIdArray) => ({
+  type: Types.DELETE_MULTIPLE,
   payload: {
-    boardId,
-    taskListId,
-    taskId,
+    taskIdArray,
   },
 });
 
-export { Types, addTask, updateTaskContent, deleteTask };
+export { Types, addTask, updateTaskContent, deleteTasks };

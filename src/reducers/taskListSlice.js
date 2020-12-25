@@ -35,6 +35,17 @@ export default function taskListReducer(state = initialState, action) {
         },
       };
 
+    case Types.DELETE_TASKS:
+      return {
+        ...state,
+        [action.payload.taskListId]: {
+          title: state[action.payload.taskListId].title,
+          tasks: state[action.payload.taskListId].tasks.filter(
+            (taskId) => !action.payload.taskIdArray.includes(taskId)
+          ),
+        },
+      };
+
     default:
       return state;
   }

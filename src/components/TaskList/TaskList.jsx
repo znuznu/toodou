@@ -32,26 +32,20 @@ import { deleteTaskListsOfBoard } from '../../actions/board.action';
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import { getNextId } from '../../utils/functions';
+import { getNewNextId } from '../../utils/functions';
 
 const selectTaskList = (state, taskListId) => {
   return state.taskLists[taskListId];
 };
 
-const selectTasks = (state) => {
-  return state.tasks;
-};
-
 const selectNextTaskId = (state) => {
-  return getNextId(state.tasks);
+  return getNewNextId(state.tasks);
 };
 
 const TaskList = (props) => {
   const { id, boardId } = props;
   const [editMode, setEditMode] = useState({ title: false });
   const [title, setTitle] = useState('');
-
-  // const [title, setTitle] = useState('This is a title');
 
   const dispatch = useDispatch();
 
@@ -64,8 +58,6 @@ const TaskList = (props) => {
     (state) => selectNextTaskId(state),
     shallowEqual
   );
-
-  const tasks = useSelector((state) => selectTasks(state, id), shallowEqual);
 
   const toggleEditTitle = () => {
     setEditMode({ ...editMode, title: !editMode.title });

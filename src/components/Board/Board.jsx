@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
@@ -8,12 +8,17 @@ import {
 } from '../../actions/board.action';
 import { addTaskList } from '../../actions/taskList.action';
 
-import { getNextId } from '../../utils/functions';
+import { getNewNextId } from '../../utils/functions';
 
 import PropTypes from 'prop-types';
 
 import { Flex, Box, Heading, IconButton, Input } from '@chakra-ui/react';
-import { ArrowBackIcon, CheckIcon, EditIcon } from '@chakra-ui/icons';
+import {
+  ArrowBackIcon,
+  CheckIcon,
+  EditIcon,
+  DeleteIcon,
+} from '@chakra-ui/icons';
 
 import TaskList from '../TaskList/TaskList';
 import TaskListAdd from '../TaskList/TaskListAdd';
@@ -22,8 +27,8 @@ const selectBoardFromId = (state, id) => {
   return state.boards[id];
 };
 
-const selectNextTaskListId = (state) => {
-  return getNextId(state.taskLists);
+const selectTaskLists = (state) => {
+  return state.taskLists;
 };
 
 const Board = (props) => {
@@ -34,8 +39,8 @@ const Board = (props) => {
     shallowEqual
   );
 
-  const lastTaskListId = useSelector(
-    (state) => selectNextTaskListId(state),
+  const taskListsState = useSelector(
+    (state) => selectTaskLists(state),
     shallowEqual
   );
 
@@ -58,8 +63,9 @@ const Board = (props) => {
   };
 
   const onAddTaskList = () => {
-    dispatch(addTaskList(`Tasks #${board.taskLists.length + 1}`));
-    dispatch(addTaskListToBoard(id, lastTaskListId));
+    const nextId = getNewNextId(taskListsState);
+    dispatch(addTaskList(`Tasks`));
+    dispatch(addTaskListToBoard(id, nextId));
   };
 
   const Header = () => {
@@ -73,11 +79,11 @@ const Board = (props) => {
             icon={<EditIcon />}
             onClick={toggleEditTitle}
           />
-          {/* <IconButton
+          <IconButton
             aria-label="Delete the board"
             icon={<DeleteIcon />}
             onClick={onDelete}
-          /> */}
+          />
         </Box>
       </>
     );
@@ -143,77 +149,3 @@ Board.propTypes = {
 };
 
 export default Board;
-
-//   const Header = () => {
-//     return (
-//       <>
-//         <Heading>{board && board.title}</Heading>
-//         <Box>
-//           <IconButton
-//             aria-label="Edit the board"
-//             mx="2"
-//             icon={<EditIcon />}
-//             onClick={toggleEditTitle}
-//           />
-//           {/* <IconButton
-//             aria-label="Delete the board"
-//             icon={<DeleteIcon />}
-//             onClick={onDelete}
-//           /> */}
-//         </Box>
-//       </>
-//     );
-//   };
-
-//   return (
-//     <>
-//       <Flex>
-//         {editMode.title ? (
-//           <>
-//             <Input
-//               size="lg"
-//               placeholder={board && board.title}
-//               w="50"
-//               name="title"
-//               value={title}
-//               onChange={onTitleChange}
-//             />
-//             <Box my="auto">
-//               <IconButton
-//                 aria-label="Save the title"
-//                 mx="2"
-//                 icon={<CheckIcon />}
-//                 onClick={onSaveTitle}
-//               />
-//               <IconButton
-//                 aria-label="Undo editing the title"
-//                 icon={<ArrowBackIcon />}
-//                 onClick={toggleEditTitle}
-//               />
-//             </Box>
-//           </>
-//         ) : (
-//           <Header />
-//         )}
-//       </Flex>
-//       <Flex flexDir="horizontal" wrap="wrap">
-//         {board && board.taskLists.length ? (
-//           board.taskLists.map((taskListId) => {
-//             return (
-//               <TaskList
-//                 id={taskListId}
-//                 boardId={id}
-//                 key={`tlid-${taskListId}`}
-//               ></TaskList>
-//             );
-//           })
-//         ) : (
-//           <Heading as="em" mt="auto" mr="4">
-//             No list found.
-//           </Heading>
-//         )}
-//         <TaskListAdd onAddTaskList={onAddTaskList}></TaskListAdd>
-//       </Flex>
-//     </>
-//   );
-// };

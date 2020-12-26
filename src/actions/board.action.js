@@ -1,7 +1,7 @@
 const Types = {
   ADD_BOARD: 'board/add',
   UPDATE_TITLE: 'board/updateTitle',
-  DELETE_BOARD: 'board/delete',
+  DELETE_BOARDS: 'board/delete',
   ADD_TASKLIST: 'board/addTaskList',
   DELETE_TASKLISTS: 'board/deleteTaskLists',
 };
@@ -20,7 +20,7 @@ const updateTitleBoard = (boardId, title) => ({
 });
 
 const deleteBoards = (boardIdArray) => ({
-  type: Types.DELETE_BOARD,
+  type: Types.DELETE_BOARDS,
   payload: { boardIdArray },
 });
 

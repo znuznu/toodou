@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import taskListReducer from './taskListSlice';
-import boardSliceReducer from './boardSlice';
+import boardReducer from './boardSlice';
 import taskReducer from './taskSlice';
 
 const rootReducer = combineReducers({
-  boards: boardSliceReducer,
+  boards: boardReducer,
   taskLists: taskListReducer,
   tasks: taskReducer,
 });

@@ -1,5 +1,5 @@
 import { Types } from '../actions/taskList.action';
-import { filterObject, getNextId } from '../utils/functions';
+import { filterObject, getNewNextId } from '../utils/functions';
 
 const initialState = {};
 
@@ -8,7 +8,7 @@ export default function taskListReducer(state = initialState, action) {
     case Types.ADD:
       return {
         ...state,
-        [getNextId(state)]: {
+        [getNewNextId(state)]: {
           title: action.payload.title,
           tasks: [],
         },

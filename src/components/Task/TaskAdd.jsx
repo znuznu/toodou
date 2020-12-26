@@ -2,8 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { EditIcon, AddIcon } from '@chakra-ui/icons';
-import { Box, IconButton, Flex, Text } from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 const TaskAdd = (props) => {
   const { onAddTask } = props;

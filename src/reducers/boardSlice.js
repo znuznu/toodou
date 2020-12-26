@@ -1,5 +1,5 @@
 import { Types } from '../actions/board.action';
-import { getNextId } from '../utils/functions';
+import { filterObject, getNewNextId } from '../utils/functions';
 
 const initialState = {};
 
@@ -8,7 +8,7 @@ export default function boardReducer(state = initialState, action) {
     case Types.ADD_BOARD:
       return {
         ...state,
-        [getNextId(state)]: {
+        [getNewNextId(state)]: {
           title: action.payload.title,
           taskLists: [...action.payload.taskLists],
         },
@@ -23,8 +23,8 @@ export default function boardReducer(state = initialState, action) {
         },
       };
 
-    case Types.DELETE_BOARD:
-      return state;
+    case Types.DELETE_BOARDS:
+      return filterObject(state, action.payload.boardIdArray);
 
     case Types.ADD_TASKLIST:
       return {

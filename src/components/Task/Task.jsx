@@ -19,10 +19,6 @@ const selectTaskFromId = (state, id) => {
   return state.tasks[id];
 };
 
-const selectTaskListFromId = (state, id) => {
-  return state.taskLists[id];
-};
-
 const Task = (props) => {
   const { id, taskListId } = props;
 
@@ -33,11 +29,6 @@ const Task = (props) => {
 
   const task = useSelector(
     (state) => selectTaskFromId(state, id),
-    shallowEqual
-  );
-
-  const taskList = useSelector(
-    (state) => selectTaskListFromId(state, taskListId),
     shallowEqual
   );
 

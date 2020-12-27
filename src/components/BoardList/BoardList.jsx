@@ -6,7 +6,7 @@ import { addNewBoard, deleteBoards } from '../../actions/board.action';
 import { deleteTaskLists } from '../../actions/taskList.action';
 import { deleteTasks } from '../../actions/task.action';
 
-import { Box, Flex, Select, Heading } from '@chakra-ui/react';
+import { Flex, Heading, Select } from '@chakra-ui/react';
 
 import { getNewNextId } from '../../utils/functions';
 import BoardListAdd from './BoardListAdd';
@@ -14,7 +14,6 @@ import Board from '../Board/Board';
 
 const selectState = (state, type) => state[type];
 
-/** Main component containing all boards. */
 const BoardList = () => {
   const [currentBoardId, setCurrentBoardId] = useState(-1);
 
@@ -76,8 +75,8 @@ const BoardList = () => {
 
   return (
     <>
-      <Box mx="6" mb="6">
-        <Flex mx="3">
+      <Flex mx="6" flexDir="column" h="100%">
+        <Flex ml="3" mb="4">
           <Select
             my="auto"
             mr="3"
@@ -86,6 +85,7 @@ const BoardList = () => {
             value={currentBoardId}
             onChange={onSelectChange}
             variant="filled"
+            focusBorderColor="gray.800"
           >
             {Object.keys(boardsState).map((boardId) => (
               <option value={boardId} key={`board-select-${boardId}`}>
@@ -102,9 +102,9 @@ const BoardList = () => {
             key={`board-${currentBoardId}`}
           />
         ) : (
-          <Heading as="h3">No boards yet.</Heading>
+          <Heading as="em">No boards yet.</Heading>
         )}
-      </Box>
+      </Flex>
     </>
   );
 };

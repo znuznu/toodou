@@ -14,6 +14,7 @@ const BoardListAdd = (props) => {
         aria-label="Add a new Board"
         icon={<AddIcon />}
         onClick={addBoard}
+        outline="none"
       />
     </Tooltip>
   );

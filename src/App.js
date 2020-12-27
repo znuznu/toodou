@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Provider as ReduxProvider } from 'react-redux';
+import { Flex } from '@chakra-ui/react';
 
 import { ChakraProvider, theme } from '@chakra-ui/react';
 
@@ -13,8 +14,10 @@ function App() {
   return (
     <ReduxProvider store={store}>
       <ChakraProvider theme={theme}>
-        <Header title="Toodou."></Header>
-        <BoardList></BoardList>
+        <Flex flexDir="column" h="100%">
+          <Header title="Toodou."></Header>
+          <BoardList></BoardList>
+        </Flex>
       </ChakraProvider>
     </ReduxProvider>
   );

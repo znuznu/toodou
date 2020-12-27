@@ -12,13 +12,15 @@ import { getNewNextId } from '../../utils/functions';
 
 import PropTypes from 'prop-types';
 
-import { Flex, Box, Heading, IconButton, Input } from '@chakra-ui/react';
 import {
-  ArrowBackIcon,
-  CheckIcon,
-  EditIcon,
-  DeleteIcon,
-} from '@chakra-ui/icons';
+  Box,
+  Flex,
+  Heading,
+  IconButton,
+  Input,
+  Tooltip,
+} from '@chakra-ui/react';
+import { CheckIcon, CloseIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 import TaskList from '../TaskList/TaskList';
 import TaskListAdd from '../TaskList/TaskListAdd';
@@ -72,26 +74,34 @@ const Board = (props) => {
     return (
       <>
         <Heading>{board && board.title}</Heading>
-        <Box>
+        <Flex>
           <IconButton
             aria-label="Edit the board"
             mx="2"
-            icon={<EditIcon />}
+            icon={
+              <Tooltip label="Edit the board" openDelay={500}>
+                <EditIcon />
+              </Tooltip>
+            }
             onClick={toggleEditTitle}
           />
           <IconButton
             aria-label="Delete the board"
-            icon={<DeleteIcon />}
+            icon={
+              <Tooltip label="Delete the board" openDelay={500}>
+                <DeleteIcon />
+              </Tooltip>
+            }
             onClick={onDelete}
           />
-        </Box>
+        </Flex>
       </>
     );
   };
 
   return (
     <>
-      <Flex>
+      <Flex mb="4">
         {editMode.title ? (
           <>
             <Input
@@ -102,17 +112,26 @@ const Board = (props) => {
               value={title}
               onChange={onTitleChange}
               autoFocus
+              focusBorderColor="gray.800"
             />
             <Box my="auto">
               <IconButton
                 aria-label="Save the title"
                 mx="2"
-                icon={<CheckIcon />}
+                icon={
+                  <Tooltip label="Save the title" openDelay={500}>
+                    <CheckIcon />
+                  </Tooltip>
+                }
                 onClick={onSaveTitle}
               />
               <IconButton
-                aria-label="Undo editing the title"
-                icon={<ArrowBackIcon />}
+                aria-label="Undo edit"
+                icon={
+                  <Tooltip label="Undo edit" openDelay={500}>
+                    <CloseIcon />
+                  </Tooltip>
+                }
                 onClick={toggleEditTitle}
               />
             </Box>
@@ -121,7 +140,7 @@ const Board = (props) => {
           <Header />
         )}
       </Flex>
-      <Flex flexDir="horizontal" wrap="wrap">
+      <Flex flexDir="horizontal" overflowX="auto" h="100%">
         {board && board.taskLists.length ? (
           board.taskLists.map((taskListId) => {
             return (
@@ -133,7 +152,7 @@ const Board = (props) => {
             );
           })
         ) : (
-          <Heading as="em" mt="auto" mr="4">
+          <Heading as="em" mr="4">
             No list found.
           </Heading>
         )}

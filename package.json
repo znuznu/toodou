@@ -11,6 +11,7 @@
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.6.0",
     "classnames": "^2.2.6",
+    "focus-visible": "^5.2.0",
     "framer-motion": "^3.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

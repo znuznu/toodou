@@ -141,12 +141,20 @@ const TaskList = (props) => {
                 <IconButton
                   aria-label="Save the title"
                   mx="2"
-                  icon={<CheckIcon />}
+                  icon={
+                    <Tooltip label="Save the title" openDelay={500}>
+                      <CheckIcon />
+                    </Tooltip>
+                  }
                   onClick={onSaveTitle}
                 />
                 <IconButton
-                  aria-label="Undo editing the title"
-                  icon={<CloseIcon />}
+                  aria-label="Undo edit"
+                  icon={
+                    <Tooltip label="Undo edit" openDelay={500}>
+                      <CloseIcon />
+                    </Tooltip>
+                  }
                   onClick={toggleEditTitle}
                 />
               </Box>

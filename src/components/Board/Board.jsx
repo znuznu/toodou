@@ -80,6 +80,10 @@ const Board = (props) => {
   const onDragEnd = (result) => {
     const { source, destination, type } = result;
 
+    if (!destination) {
+      return;
+    }
+
     if (type === 'taskList') {
       dispatch(moveTaskList(id, source.index, destination.index));
     } else {

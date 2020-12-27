@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 import {
   addTaskListToBoard,
   updateTitleBoard,
 } from '../../actions/board.action';
-import { addTaskList } from '../../actions/taskList.action';
+import {
+  addTaskList,
+  moveTaskSelf,
+  moveTaskBetween,
+} from '../../actions/taskList.action';
 
 import { getNewNextId } from '../../utils/functions';
 
@@ -24,6 +30,7 @@ import { CheckIcon, CloseIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 import TaskList from '../TaskList/TaskList';
 import TaskListAdd from '../TaskList/TaskListAdd';
+import { deleteTasks } from '../../actions/task.action';
 
 const selectBoardFromId = (state, id) => {
   return state.boards[id];
@@ -68,6 +75,29 @@ const Board = (props) => {
     const nextId = getNewNextId(taskListsState);
     dispatch(addTaskList(`Tasks`));
     dispatch(addTaskListToBoard(id, nextId));
+  };
+
+  const onDragEnd = (result) => {
+    const { source, destination, type } = result;
+
+    if (type === 'taskList') {
+      // todo: move taskList
+    } else {
+      if (source.droppableId === destination.droppableId) {
+        dispatch(
+          moveTaskSelf(source.droppableId, source.index, destination.index)
+        );
+      } else {
+        dispatch(
+          moveTaskBetween(
+            source.droppableId,
+            destination.droppableId,
+            source.index,
+            destination.index
+          )
+        );
+      }
+    }
   };
 
   const Header = () => {
@@ -142,15 +172,45 @@ const Board = (props) => {
       </Flex>
       <Flex flexDir="horizontal" overflowX="auto" h="100%">
         {board && board.taskLists.length ? (
-          board.taskLists.map((taskListId) => {
-            return (
-              <TaskList
-                id={taskListId}
-                boardId={id}
-                key={`tlid-${taskListId}`}
-              ></TaskList>
-            );
-          })
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable
+              droppableId={`droppable-board-${id}`}
+              direction="horizontal"
+              type="taskList"
+            >
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  style={{
+                    display: 'flex',
+                  }}
+                >
+                  {board.taskLists.map((taskListId, index) => (
+                    <Draggable
+                      key={taskListId}
+                      draggableId={`draggable-tasklist-${taskListId}`}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <TaskList
+                            id={taskListId}
+                            boardId={id}
+                            key={`tlid-${taskListId}`}
+                          ></TaskList>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         ) : (
           <Heading as="em" mr="4">
             No list found.

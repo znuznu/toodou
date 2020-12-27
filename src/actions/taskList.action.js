@@ -4,6 +4,8 @@ const Types = {
   DELETE_MULTIPLE: 'taskList/delete',
   ADD_TASK: 'taskList/addTask',
   DELETE_TASKS: 'taskList/deleteTasks',
+  MOVE_TASK_SELF: 'taskList/moveTaskSelf',
+  MOVE_TASK_BETWEEN: 'taskList/moveTaskBetween',
 };
 
 const addTaskList = (title) => ({
@@ -37,6 +39,32 @@ const deleteTasksOfTaskList = (taskListId, taskIdArray) => ({
   },
 });
 
+// Move the task on the same tasklist
+const moveTaskSelf = (taskListId, taskSourceIndex, taskDestIndex) => ({
+  type: Types.MOVE_TASK_SELF,
+  payload: {
+    taskListId,
+    taskSourceIndex,
+    taskDestIndex,
+  },
+});
+
+// Move the task between different lists
+const moveTaskBetween = (
+  taskListSourceId,
+  taskListDestId,
+  taskSourceIndex,
+  taskDestIndex
+) => ({
+  type: Types.MOVE_TASK_BETWEEN,
+  payload: {
+    taskListSourceId,
+    taskListDestId,
+    taskSourceIndex,
+    taskDestIndex,
+  },
+});
+
 export {
   Types,
   addTaskList,
@@ -44,4 +72,6 @@ export {
   deleteTaskLists,
   addTaskToTaskList,
   deleteTasksOfTaskList,
+  moveTaskSelf,
+  moveTaskBetween,
 };

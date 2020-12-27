@@ -1,5 +1,7 @@
 import './TaskList.scss';
 
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
@@ -124,7 +126,7 @@ const TaskList = (props) => {
         mr="4"
         boxShadow="base"
         display="inline-table"
-        className="taskList"
+        bg="white"
       >
         <Flex justifyContent="space-between" mb={3}>
           {editMode.title ? (
@@ -163,14 +165,39 @@ const TaskList = (props) => {
             <TaskListHeader />
           )}
         </Flex>
-        <Box overflowY="auto" className="tasks">
-          {taskList &&
-            taskList.tasks &&
-            taskList.tasks.map((taskId) => (
-              <Task key={`task-${taskId}`} id={taskId} taskListId={id}></Task>
-            ))}
-        </Box>
-        {/* todo: inside box ? */}
+
+        <Droppable droppableId={`${id}`} type="task">
+          {(provided) => (
+            <Box ref={provided.innerRef} minH="5" className="tasks">
+              {taskList &&
+                taskList.tasks &&
+                taskList.tasks.map((taskId, index) => (
+                  <Draggable
+                    key={`draggable-task-${taskId}`}
+                    draggableId={`draggable-task-${taskId}`}
+                    index={index}
+                  >
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Task
+                          key={`task-${taskId}`}
+                          id={taskId}
+                          taskListId={id}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+
+              {provided.placeholder}
+            </Box>
+          )}
+        </Droppable>
+
         <TaskAdd onAddTask={onAddTask}></TaskAdd>
       </Box>
     </>

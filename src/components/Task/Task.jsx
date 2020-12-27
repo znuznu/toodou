@@ -89,6 +89,7 @@ const Task = (props) => {
       p="3"
       mb={3}
       _hover={{ bg: 'gray.50' }}
+      bg="white"
     >
       {task ? (
         editMode.content ? (

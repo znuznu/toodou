@@ -49,6 +49,47 @@ export default function taskListReducer(state = initialState, action) {
         },
       };
 
+    case Types.MOVE_TASK_BETWEEN:
+      let tasksSourceClone = state[
+        action.payload.taskListSourceId
+      ].tasks.slice();
+
+      const toMoveBetween = tasksSourceClone.splice(
+        action.payload.taskSourceIndex,
+        1
+      )[0];
+
+      let tasksDestClone = state[action.payload.taskListDestId].tasks;
+      tasksDestClone.splice(action.payload.taskDestIndex, 0, toMoveBetween);
+
+      return {
+        ...state,
+        [action.payload.taskListSourceId]: {
+          ...state[action.payload.taskListSourceId],
+          tasks: tasksSourceClone,
+        },
+        [action.payload.taskListDestId]: {
+          ...state[action.payload.taskListDestId],
+          tasks: tasksDestClone,
+        },
+      };
+
+    case Types.MOVE_TASK_SELF:
+      let tasksClone = state[action.payload.taskListId].tasks.slice();
+      const toMoveSelf = tasksClone.splice(
+        action.payload.taskSourceIndex,
+        1
+      )[0];
+      tasksClone.splice(action.payload.taskDestIndex, 0, toMoveSelf);
+
+      return {
+        ...state,
+        [action.payload.taskListId]: {
+          ...state[action.payload.taskListId],
+          tasks: tasksClone,
+        },
+      };
+
     default:
       return state;
   }

@@ -4,6 +4,7 @@ const Types = {
   DELETE_BOARDS: 'board/delete',
   ADD_TASKLIST: 'board/addTaskList',
   DELETE_TASKLISTS: 'board/deleteTaskLists',
+  MOVE_TASKLIST: 'board/moveTaskList',
 };
 
 const addNewBoard = (title) => ({
@@ -40,6 +41,16 @@ const deleteTaskListsOfBoard = (boardId, taskListIdArray) => ({
   },
 });
 
+// Move the tasklist in the board array
+const moveTaskList = (boardId, sourceIndex, destinationIndex) => ({
+  type: Types.MOVE_TASKLIST,
+  payload: {
+    boardId,
+    sourceIndex,
+    destinationIndex,
+  },
+});
+
 export {
   Types,
   addNewBoard,
@@ -47,4 +58,5 @@ export {
   deleteBoards,
   addTaskListToBoard,
   deleteTaskListsOfBoard,
+  moveTaskList,
 };

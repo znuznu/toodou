@@ -1,8 +1,11 @@
+import './Task.scss';
+
 import React, { useState } from 'react';
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import { CloseIcon, CheckIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
+
 import {
   Box,
   Flex,
@@ -10,6 +13,7 @@ import {
   Text,
   Tooltip,
   SkeletonText,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
 import { updateTaskContent, deleteTasks } from '../../actions/task.action';
@@ -22,10 +26,15 @@ const selectTaskFromId = (state, id) => {
 };
 
 const Task = (props) => {
-  const { id, taskListId } = props;
+  const { id, taskListId, isDragged } = props;
 
   const [editMode, setEditMode] = useState({ content: false });
   const [content, setContent] = useState('');
+
+  const bg = useColorModeValue('white', 'gray.800');
+  const bgDraggedHover = useColorModeValue('gray.100', '#2C323D');
+  const colorBtn = useColorModeValue('gray.400', '#51555e');
+  const colorBtnHover = useColorModeValue('gray.800', '#F0F0F1');
 
   const dispatch = useDispatch();
 
@@ -54,16 +63,16 @@ const Task = (props) => {
 
   const TaskRender = () => {
     return (
-      <Flex justifyContent="space-between">
+      <Flex justifyContent="space-between" className="task">
         <Text>{task.content}</Text>
-        <Flex flexDir="column" ml="3">
+        <Flex flexDir="column" ml="3" className="task-buttons">
           <Tooltip label="Edit the task" openDelay={500}>
             <EditIcon
               mb={3}
               aria-label="Edit the task"
               cursor="pointer"
-              color="gray.400"
-              _hover={{ color: 'gray.800' }}
+              color={colorBtn}
+              _hover={{ color: colorBtnHover }}
               onClick={toggleEditContent}
             />
           </Tooltip>
@@ -71,8 +80,8 @@ const Task = (props) => {
             <DeleteIcon
               aria-label="Delete the task"
               cursor="pointer"
-              color="gray.400"
-              _hover={{ color: 'gray.800' }}
+              color={colorBtn}
+              _hover={{ color: colorBtnHover }}
               onClick={onDelete}
             />
           </Tooltip>
@@ -88,8 +97,8 @@ const Task = (props) => {
       overflow="hidden"
       p="3"
       mb={3}
-      _hover={{ bg: 'gray.50' }}
-      bg="white"
+      _hover={{ bg: bgDraggedHover }}
+      bg={isDragged ? bgDraggedHover : bg}
     >
       {task ? (
         editMode.content ? (
@@ -107,8 +116,8 @@ const Task = (props) => {
                   mb={3}
                   aria-label="Save the task"
                   cursor="pointer"
-                  color="gray.400"
-                  _hover={{ color: 'gray.800' }}
+                  color={colorBtn}
+                  _hover={{ color: colorBtnHover }}
                   onClick={onSaveContent}
                 />
               </Tooltip>
@@ -116,8 +125,8 @@ const Task = (props) => {
                 <CloseIcon
                   aria-label="Undo edit"
                   cursor="pointer"
-                  color="gray.400"
-                  _hover={{ color: 'gray.800' }}
+                  color={colorBtn}
+                  _hover={{ color: colorBtnHover }}
                   onClick={toggleEditContent}
                   boxSize={3}
                 />
@@ -137,6 +146,7 @@ const Task = (props) => {
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   taskListId: PropTypes.number.isRequired,
+  isDragged: PropTypes.bool.isRequired,
 };
 
 export default Task;

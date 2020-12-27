@@ -49,6 +49,19 @@ export default function boardReducer(state = initialState, action) {
         },
       };
 
+    case Types.MOVE_TASKLIST:
+      let tasksListsClone = state[action.payload.boardId].taskLists.slice();
+      const toMove = tasksListsClone.splice(action.payload.sourceIndex, 1)[0];
+      tasksListsClone.splice(action.payload.destinationIndex, 0, toMove);
+
+      return {
+        ...state,
+        [action.payload.boardId]: {
+          ...state[action.payload.boardId],
+          taskLists: tasksListsClone,
+        },
+      };
+
     default:
       return state;
   }

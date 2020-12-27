@@ -15,6 +15,7 @@ import {
   IconButton,
   Input,
   Tooltip,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
 import Task from '../Task/Task';
@@ -44,6 +45,9 @@ const TaskList = (props) => {
   const { id, boardId } = props;
   const [editMode, setEditMode] = useState({ title: false });
   const [title, setTitle] = useState('');
+
+  // Background of the taskList, need one due to the dnd
+  const bg = useColorModeValue('white', 'gray.800');
 
   const dispatch = useDispatch();
 
@@ -126,7 +130,7 @@ const TaskList = (props) => {
         mr="4"
         boxShadow="base"
         display="inline-table"
-        bg="white"
+        bg={bg}
       >
         <Flex justifyContent="space-between" mb={3}>
           {editMode.title ? (
@@ -187,6 +191,7 @@ const TaskList = (props) => {
                           key={`task-${taskId}`}
                           id={taskId}
                           taskListId={id}
+                          isDragged={snapshot.isDragging}
                         />
                       </div>
                     )}

@@ -6,6 +6,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import {
   addTaskListToBoard,
+  moveTaskList,
   updateTitleBoard,
 } from '../../actions/board.action';
 import {
@@ -30,7 +31,6 @@ import { CheckIcon, CloseIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 import TaskList from '../TaskList/TaskList';
 import TaskListAdd from '../TaskList/TaskListAdd';
-import { deleteTasks } from '../../actions/task.action';
 
 const selectBoardFromId = (state, id) => {
   return state.boards[id];
@@ -81,7 +81,7 @@ const Board = (props) => {
     const { source, destination, type } = result;
 
     if (type === 'taskList') {
-      // todo: move taskList
+      dispatch(moveTaskList(id, source.index, destination.index));
     } else {
       if (source.droppableId === destination.droppableId) {
         dispatch(

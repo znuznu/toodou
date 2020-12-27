@@ -3,10 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 const TaskAdd = (props) => {
   const { onAddTask } = props;
+
+  const color = useColorModeValue('gray.400', '#51555e');
+  const bgHover = useColorModeValue('gray.100', '#2C323D');
+  const colorHover = useColorModeValue('gray.800', '#F0F0F1');
 
   return (
     <Box
@@ -15,8 +19,8 @@ const TaskAdd = (props) => {
       overflow="hidden"
       p="3"
       mb={3}
-      color="gray.500"
-      _hover={{ bg: 'gray.100', color: 'gray.800' }}
+      color={color}
+      _hover={{ bg: bgHover, color: colorHover }}
       cursor="pointer"
       onClick={onAddTask}
     >

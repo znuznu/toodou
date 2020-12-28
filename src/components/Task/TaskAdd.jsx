@@ -5,12 +5,35 @@ import PropTypes from 'prop-types';
 import { AddIcon } from '@chakra-ui/icons';
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
+import { addTaskToTaskList } from '../../actions/taskList.action';
+import { addTask } from '../../actions/task.action';
+
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+
+import { getNewNextId } from '../../utils/functions';
+
+const selectNextTaskId = (state) => {
+  return getNewNextId(state.tasks);
+};
+
 const TaskAdd = (props) => {
-  const { onAddTask } = props;
+  const { taskListId } = props;
 
   const color = useColorModeValue('gray.400', '#51555e');
   const bgHover = useColorModeValue('gray.100', '#2C323D');
   const colorHover = useColorModeValue('gray.800', '#F0F0F1');
+
+  const dispatch = useDispatch();
+
+  const lastTaskId = useSelector(
+    (state) => selectNextTaskId(state),
+    shallowEqual
+  );
+
+  const onAddTask = () => {
+    dispatch(addTask(`A task...`));
+    dispatch(addTaskToTaskList(taskListId, lastTaskId));
+  };
 
   return (
     <Box
@@ -35,7 +58,7 @@ const TaskAdd = (props) => {
 };
 
 TaskAdd.propTypes = {
-  onAddTask: PropTypes.func.isRequired,
+  taskListId: PropTypes.number.isRequired,
 };
 
 export default TaskAdd;

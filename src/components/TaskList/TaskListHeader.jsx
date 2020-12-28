@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 import {
   Box,
   Flex,
@@ -126,6 +128,11 @@ const TaskListHeader = (props) => {
       )}
     </Flex>
   );
+};
+
+TaskListHeader.propTypes = {
+  id: PropTypes.number.isRequired,
+  boardId: PropTypes.number.isRequired,
 };
 
 export default TaskListHeader;

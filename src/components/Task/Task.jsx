@@ -61,7 +61,7 @@ const Task = (props) => {
     toggleEditContent();
   };
 
-  const TaskRender = () => {
+  const Preview = () => {
     return (
       <Flex justifyContent="space-between" className="task">
         <Text>{task.content}</Text>
@@ -108,7 +108,7 @@ const Task = (props) => {
               value={content}
               onChange={onContentChange}
               autoFocus
-              focusBorderColor="gray.800"
+              focusBorderColor="gray.700"
             />
             <Flex flexDir="column" ml="3">
               <Tooltip label="Save the task" openDelay={500}>
@@ -134,7 +134,7 @@ const Task = (props) => {
             </Flex>
           </Flex>
         ) : (
-          <TaskRender />
+          <Preview />
         )
       ) : (
         <SkeletonText />

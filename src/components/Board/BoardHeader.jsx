@@ -26,9 +26,9 @@ const selectBoardFromId = (state, id) => {
 const selectState = (state, type) => state[type];
 
 const BoardHeader = (props) => {
-  const { id } = props;
+  const { id, isNew } = props;
 
-  const [editMode, setEditMode] = useState({ title: false });
+  const [editMode, setEditMode] = useState({ title: isNew });
   const [title, setTitle] = useState('');
 
   const board = useSelector(
@@ -150,6 +150,7 @@ const BoardHeader = (props) => {
 
 BoardHeader.propTypes = {
   id: PropTypes.number.isRequired,
+  isNew: PropTypes.bool.isRequired,
 };
 
 export default BoardHeader;

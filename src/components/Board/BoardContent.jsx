@@ -22,7 +22,7 @@ const BoardContent = (props) => {
   const { id } = props;
 
   // Focus the newly created taskList
-  const [openTaskListId, setOpenTaskListId] = useState(-1);
+  const [newTaskListId, setNewTaskListId] = useState(-1);
 
   const board = useSelector(
     (state) => selectBoardFromId(state, id),
@@ -67,7 +67,7 @@ const BoardContent = (props) => {
             direction="horizontal"
             type="taskList"
           >
-            {(provided, snapshot) => (
+            {(provided) => (
               <div
                 ref={provided.innerRef}
                 style={{
@@ -80,7 +80,7 @@ const BoardContent = (props) => {
                     draggableId={`draggable-tasklist-${taskListId}`}
                     index={index}
                   >
-                    {(provided, snapshot) => (
+                    {(provided) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
@@ -90,7 +90,7 @@ const BoardContent = (props) => {
                           id={taskListId}
                           boardId={id}
                           key={`tlid-${taskListId}`}
-                          shouldBeFocused={openTaskListId === taskListId}
+                          isNew={newTaskListId === taskListId}
                         ></TaskList>
                       </div>
                     )}
@@ -106,7 +106,7 @@ const BoardContent = (props) => {
           No list found.
         </Heading>
       )}
-      <TaskListAdd boardId={id} setOpenTaskListId={setOpenTaskListId} />
+      <TaskListAdd boardId={id} setNewTaskListId={setNewTaskListId} />
     </Flex>
   );
 };

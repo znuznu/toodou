@@ -17,7 +17,7 @@ const selectTaskLists = (state) => {
 };
 
 const TaskListAdd = (props) => {
-  const { boardId, setOpenTaskListId } = props;
+  const { boardId, setNewTaskListId } = props;
 
   const dispatch = useDispatch();
 
@@ -28,9 +28,9 @@ const TaskListAdd = (props) => {
 
   const onAddTaskList = () => {
     const nextId = getNewNextId(taskListsState);
-    dispatch(addTaskList(`Enter list title...`));
+    dispatch(addTaskList(`An incredible title...`));
     dispatch(addTaskListToBoard(boardId, nextId));
-    setOpenTaskListId(nextId);
+    setNewTaskListId(nextId);
   };
 
   return (
@@ -46,7 +46,7 @@ const TaskListAdd = (props) => {
 
 TaskListAdd.propTypes = {
   boardId: PropTypes.number.isRequired,
-  setOpenTaskListId: PropTypes.func.isRequired,
+  setNewTaskListId: PropTypes.func.isRequired,
 };
 
 export default TaskListAdd;

@@ -8,7 +8,7 @@ import TaskListHeader from './TaskListHeader';
 import TaskListContent from './TaskListContent';
 
 const TaskList = (props) => {
-  const { id, boardId, shouldBeFocused } = props;
+  const { id, boardId, isNew } = props;
 
   // Background of the taskList, need one due to the dnd
   const bg = useColorModeValue('white', 'gray.800');
@@ -28,11 +28,7 @@ const TaskList = (props) => {
         display="inline-table"
         bg={bg}
       >
-        <TaskListHeader
-          id={id}
-          boardId={boardId}
-          shouldBeFocused={shouldBeFocused}
-        />
+        <TaskListHeader id={id} boardId={boardId} isNew={isNew} />
         <TaskListContent id={id} />
       </Box>
     </>
@@ -42,7 +38,7 @@ const TaskList = (props) => {
 TaskList.propTypes = {
   id: PropTypes.number.isRequired,
   boardId: PropTypes.number.isRequired,
-  shouldBeFocused: PropTypes.bool.isRequired,
+  isNew: PropTypes.bool.isRequired,
 };
 
 export default TaskList;

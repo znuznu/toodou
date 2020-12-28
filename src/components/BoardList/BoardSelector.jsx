@@ -10,7 +10,7 @@ const selectState = (state, type) => state[type];
 
 const BoardSelector = (props) => {
   // Should probably store the current board id in redux
-  const { currentBoardId, setCurrentBoardId } = props;
+  const { currentBoardId, setCurrentBoardId, setIsNewBoard } = props;
 
   const boardsState = useSelector(
     (state) => selectState(state, 'boards'),
@@ -19,6 +19,7 @@ const BoardSelector = (props) => {
 
   const onSelectChange = (event) => {
     setCurrentBoardId(Number(event.target.value));
+    setIsNewBoard(false);
   };
 
   return (
@@ -46,6 +47,7 @@ const BoardSelector = (props) => {
 BoardSelector.propTypes = {
   currentBoardId: PropTypes.number,
   setCurrentBoardId: PropTypes.func.isRequired,
+  setIsNewBoard: PropTypes.func.isRequired,
 };
 
 export default BoardSelector;

@@ -14,6 +14,9 @@ const selectState = (state, type) => state[type];
 const BoardList = () => {
   const [currentBoardId, setCurrentBoardId] = useState(-1);
 
+  // Focus the newly created Board
+  const [isNewBoard, setIsNewBoard] = useState(false);
+
   const boardsState = useSelector(
     (state) => selectState(state, 'boards'),
     shallowEqual
@@ -43,12 +46,20 @@ const BoardList = () => {
           <BoardSelector
             currentBoardId={currentBoardId}
             setCurrentBoardId={setCurrentBoardId}
+            setIsNewBoard={setIsNewBoard}
           />
-          <BoardListAdd setCurrentBoardId={setCurrentBoardId} />
+          <BoardListAdd
+            setCurrentBoardId={setCurrentBoardId}
+            setIsNewBoard={setIsNewBoard}
+          />
           <ThemeSwitcher />
         </Flex>
         {Object.keys(boardsState).length ? (
-          <Board id={currentBoardId} key={`board-${currentBoardId}`} />
+          <Board
+            id={currentBoardId}
+            key={`board-${currentBoardId}`}
+            isNew={isNewBoard}
+          />
         ) : (
           <Heading as="em">No boards yet.</Heading>
         )}

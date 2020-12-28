@@ -21,7 +21,7 @@ const TaskListContent = (props) => {
   const { id } = props;
 
   // Focus the newly created task
-  const [openTaskId, setOpenTaskId] = useState(-1);
+  const [newTaskId, setNewTaskId] = useState(-1);
 
   const taskList = useSelector(
     (state) => selectTaskList(state, id),
@@ -52,7 +52,7 @@ const TaskListContent = (props) => {
                         id={taskId}
                         taskListId={id}
                         isDragged={snapshot.isDragging}
-                        shouldBeFocused={taskId === openTaskId}
+                        isNew={taskId === newTaskId}
                       />
                     </Box>
                   )}
@@ -62,7 +62,7 @@ const TaskListContent = (props) => {
           </Box>
         )}
       </Droppable>
-      <TaskAdd taskListId={id} setOpenTaskId={setOpenTaskId}></TaskAdd>
+      <TaskAdd taskListId={id} setNewTaskId={setNewTaskId}></TaskAdd>
     </>
   );
 };

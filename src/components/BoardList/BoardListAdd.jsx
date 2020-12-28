@@ -14,7 +14,7 @@ import { getNewNextId } from '../../utils/functions';
 const selectState = (state, type) => state[type];
 
 const BoardListAdd = (props) => {
-  const { setCurrentBoardId } = props;
+  const { setCurrentBoardId, setIsNewBoard } = props;
 
   const dispatch = useDispatch();
 
@@ -27,6 +27,7 @@ const BoardListAdd = (props) => {
     const nextId = getNewNextId(boardsState);
     dispatch(addNewBoard(`Board #${nextId + 1}`));
     setCurrentBoardId(nextId);
+    setIsNewBoard(true);
   };
 
   return (
@@ -43,6 +44,7 @@ const BoardListAdd = (props) => {
 
 BoardListAdd.propTypes = {
   setCurrentBoardId: PropTypes.func.isRequired,
+  setIsNewBoard: PropTypes.func.isRequired,
 };
 
 export default BoardListAdd;

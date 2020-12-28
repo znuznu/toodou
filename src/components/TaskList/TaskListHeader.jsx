@@ -26,9 +26,9 @@ const selectTaskList = (state, taskListId) => {
 };
 
 const TaskListHeader = (props) => {
-  const { id, boardId, shouldBeFocused } = props;
+  const { id, boardId, isNew } = props;
 
-  const [editMode, setEditMode] = useState({ title: shouldBeFocused });
+  const [editMode, setEditMode] = useState({ title: isNew });
   const [title, setTitle] = useState('');
 
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ const TaskListHeader = (props) => {
 TaskListHeader.propTypes = {
   id: PropTypes.number.isRequired,
   boardId: PropTypes.number.isRequired,
-  shouldBeFocused: PropTypes.bool.isRequired,
+  isNew: PropTypes.bool.isRequired,
 };
 
 export default TaskListHeader;

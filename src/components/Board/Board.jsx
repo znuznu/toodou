@@ -6,11 +6,11 @@ import BoardHeader from './BoardHeader';
 import BoardContent from './BoardContent';
 
 const Board = (props) => {
-  const { id } = props;
+  const { id, isNew } = props;
 
   return (
     <>
-      <BoardHeader id={id} />
+      <BoardHeader id={id} isNew={isNew} />
       <BoardContent id={id} />
     </>
   );
@@ -18,6 +18,7 @@ const Board = (props) => {
 
 Board.propTypes = {
   id: PropTypes.number.isRequired,
+  isNew: PropTypes.bool.isRequired,
 };
 
 export default Board;

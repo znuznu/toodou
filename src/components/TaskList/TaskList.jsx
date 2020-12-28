@@ -197,7 +197,6 @@ const TaskList = (props) => {
                     )}
                   </Draggable>
                 ))}
-
               {provided.placeholder}
             </Box>
           )}

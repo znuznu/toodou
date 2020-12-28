@@ -6,27 +6,18 @@ import { addNewBoard, deleteBoards } from '../../actions/board.action';
 import { deleteTaskLists } from '../../actions/taskList.action';
 import { deleteTasks } from '../../actions/task.action';
 
-import {
-  IconButton,
-  Flex,
-  Heading,
-  Select,
-  Tooltip,
-  useColorMode,
-} from '@chakra-ui/react';
-
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { Flex, Heading, Select } from '@chakra-ui/react';
 
 import { getNewNextId } from '../../utils/functions';
+
 import BoardListAdd from './BoardListAdd';
 import Board from '../Board/Board';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 
 const selectState = (state, type) => state[type];
 
 const BoardList = () => {
   const [currentBoardId, setCurrentBoardId] = useState(-1);
-
-  const { colorMode, toggleColorMode } = useColorMode();
 
   const boardsState = useSelector(
     (state) => selectState(state, 'boards'),
@@ -105,16 +96,7 @@ const BoardList = () => {
             ))}
           </Select>
           <BoardListAdd addBoard={addBoard} />
-          <IconButton
-            aria-label="Switch theme"
-            icon={
-              <Tooltip label="Switch theme" openDelay={500}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              </Tooltip>
-            }
-            onClick={toggleColorMode}
-            ml="6"
-          />
+          <ThemeSwitcher />
         </Flex>
         {Object.keys(boardsState).length ? (
           <Board

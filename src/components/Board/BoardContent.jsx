@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
@@ -20,6 +20,9 @@ const selectBoardFromId = (state, id) => {
 
 const BoardContent = (props) => {
   const { id } = props;
+
+  // Focus the newly created taskList
+  const [openTaskListId, setOpenTaskListId] = useState(-1);
 
   const board = useSelector(
     (state) => selectBoardFromId(state, id),
@@ -87,6 +90,7 @@ const BoardContent = (props) => {
                           id={taskListId}
                           boardId={id}
                           key={`tlid-${taskListId}`}
+                          shouldBeFocused={openTaskListId === taskListId}
                         ></TaskList>
                       </div>
                     )}
@@ -102,7 +106,7 @@ const BoardContent = (props) => {
           No list found.
         </Heading>
       )}
-      <TaskListAdd boardId={id} />
+      <TaskListAdd boardId={id} setOpenTaskListId={setOpenTaskListId} />
     </Flex>
   );
 };

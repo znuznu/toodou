@@ -9,7 +9,7 @@ import { AddIcon } from '@chakra-ui/icons';
 
 import { addNewBoard } from '../../actions/board.action';
 
-import { getNewNextId } from '../../utils/functions';
+import { getNewNextId } from '../../helpers/functions';
 
 const selectState = (state, type) => state[type];
 

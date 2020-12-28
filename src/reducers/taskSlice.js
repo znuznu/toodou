@@ -1,5 +1,5 @@
 import { Types } from '../actions/task.action';
-import { filterObject, getNewNextId } from '../utils/functions';
+import { filterObject, getNewNextId } from '../helpers/functions';
 
 const initialState = {};
 

@@ -10,7 +10,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import { addTaskListToBoard } from '../../actions/board.action';
 import { addTaskList } from '../../actions/taskList.action';
 
-import { getNewNextId } from '../../utils/functions';
+import { getNewNextId } from '../../helpers/functions';
 
 const selectTaskLists = (state) => {
   return state.taskLists;

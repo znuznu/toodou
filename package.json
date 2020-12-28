@@ -1,6 +1,10 @@
 {
   "name": "toodou",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "A task manager.",
+  "author": "znu (https://github.com/znuznu)",
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^1.0.2",

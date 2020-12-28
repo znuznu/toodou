@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { CheckIcon, CloseIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
-import { selectAll } from '../../utils/events';
+import { selectAll } from '../../helpers/events';
 
 const selectBoardFromId = (state, id) => {
   return state.boards[id];

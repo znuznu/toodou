@@ -1,5 +1,3 @@
-import './TaskList.scss';
-
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import React, { useState } from 'react';
@@ -32,7 +30,7 @@ const TaskListContent = (props) => {
     <>
       <Droppable droppableId={`${id}`} type="task">
         {(provided) => (
-          <Box ref={provided.innerRef} minH="5" className="tasks">
+          <Box ref={provided.innerRef} minH="5">
             {taskList &&
               taskList.tasks &&
               taskList.tasks.map((taskId, index) => (

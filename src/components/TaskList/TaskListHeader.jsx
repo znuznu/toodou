@@ -21,7 +21,7 @@ import {
 import { deleteTasks } from '../../actions/task.action';
 import { deleteTaskListsOfBoard } from '../../actions/board.action';
 
-import { selectAll } from '../../utils/events';
+import { selectAll } from '../../helpers/events';
 
 const selectTaskList = (state, taskListId) => {
   return state.taskLists[taskListId];

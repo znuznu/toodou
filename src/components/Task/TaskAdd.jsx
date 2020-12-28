@@ -10,7 +10,7 @@ import { addTask } from '../../actions/task.action';
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import { getNewNextId } from '../../utils/functions';
+import { getNewNextId } from '../../helpers/functions';
 
 const selectNextTaskId = (state) => {
   return getNewNextId(state.tasks);

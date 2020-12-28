@@ -17,7 +17,7 @@ const selectNextTaskId = (state) => {
 };
 
 const TaskAdd = (props) => {
-  const { taskListId } = props;
+  const { taskListId, setOpenTaskId } = props;
 
   const color = useColorModeValue('gray.400', '#51555e');
   const bgHover = useColorModeValue('gray.100', '#2C323D');
@@ -33,6 +33,7 @@ const TaskAdd = (props) => {
   const onAddTask = () => {
     dispatch(addTask(`A task...`));
     dispatch(addTaskToTaskList(taskListId, lastTaskId));
+    setOpenTaskId(lastTaskId);
   };
 
   return (
@@ -59,6 +60,7 @@ const TaskAdd = (props) => {
 
 TaskAdd.propTypes = {
   taskListId: PropTypes.number.isRequired,
+  setOpenTaskId: PropTypes.func.isRequired,
 };
 
 export default TaskAdd;

@@ -1,6 +1,8 @@
+import './TaskList.scss';
+
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -17,6 +19,9 @@ const selectTaskList = (state, taskListId) => {
 
 const TaskListContent = (props) => {
   const { id } = props;
+
+  // Focus the newly created task
+  const [openTaskId, setOpenTaskId] = useState(-1);
 
   const taskList = useSelector(
     (state) => selectTaskList(state, id),
@@ -47,6 +52,7 @@ const TaskListContent = (props) => {
                         id={taskId}
                         taskListId={id}
                         isDragged={snapshot.isDragging}
+                        shouldBeFocused={taskId === openTaskId}
                       />
                     </Box>
                   )}
@@ -56,7 +62,7 @@ const TaskListContent = (props) => {
           </Box>
         )}
       </Droppable>
-      <TaskAdd taskListId={id}></TaskAdd>
+      <TaskAdd taskListId={id} setOpenTaskId={setOpenTaskId}></TaskAdd>
     </>
   );
 };

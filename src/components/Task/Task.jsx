@@ -26,9 +26,9 @@ const selectTaskFromId = (state, id) => {
 };
 
 const Task = (props) => {
-  const { id, taskListId, isDragged } = props;
+  const { id, taskListId, isDragged, shouldBeFocused } = props;
 
-  const [editMode, setEditMode] = useState({ content: false });
+  const [editMode, setEditMode] = useState({ content: shouldBeFocused });
   const [content, setContent] = useState('');
 
   const bg = useColorModeValue('white', 'gray.800');
@@ -147,6 +147,7 @@ Task.propTypes = {
   id: PropTypes.number.isRequired,
   taskListId: PropTypes.number.isRequired,
   isDragged: PropTypes.bool.isRequired,
+  shouldBeFocused: PropTypes.bool.isRequired,
 };
 
 export default Task;

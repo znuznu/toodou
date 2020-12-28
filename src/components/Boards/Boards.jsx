@@ -4,14 +4,14 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import { Flex, Heading } from '@chakra-ui/react';
 
-import BoardListAdd from './BoardListAdd';
+import BoardAdd from './BoardAdd';
 import Board from '../Board/Board';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import BoardSelector from './BoardSelector';
 
 const selectState = (state, type) => state[type];
 
-const BoardList = () => {
+const Boards = () => {
   const [currentBoardId, setCurrentBoardId] = useState(-1);
 
   // Focus the newly created Board
@@ -48,7 +48,7 @@ const BoardList = () => {
             setCurrentBoardId={setCurrentBoardId}
             setIsNewBoard={setIsNewBoard}
           />
-          <BoardListAdd
+          <BoardAdd
             setCurrentBoardId={setCurrentBoardId}
             setIsNewBoard={setIsNewBoard}
           />
@@ -68,4 +68,4 @@ const BoardList = () => {
   );
 };
 
-export default BoardList;
+export default Boards;

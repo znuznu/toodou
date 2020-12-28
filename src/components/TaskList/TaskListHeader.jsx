@@ -21,6 +21,8 @@ import {
 import { deleteTasks } from '../../actions/task.action';
 import { deleteTaskListsOfBoard } from '../../actions/board.action';
 
+import { selectAll } from '../../utils/events';
+
 const selectTaskList = (state, taskListId) => {
   return state.taskLists[taskListId];
 };
@@ -107,6 +109,8 @@ const TaskListHeader = (props) => {
             autoFocus
             focusBorderColor="gray.700"
             onKeyPress={(e) => e.key === 'Enter' && onSaveTitle()}
+            onFocus={selectAll}
+            size="lg"
           />
           <Box my="auto" display="flex">
             <IconButton

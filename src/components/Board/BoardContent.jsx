@@ -59,7 +59,7 @@ const BoardContent = (props) => {
   };
 
   return (
-    <Flex flexDir="horizontal" overflowX="auto" h="100%">
+    <Flex flexDir="horizontal" overflow="auto" h="calc(100vh - 223px)">
       {board && board.taskLists.length ? (
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable

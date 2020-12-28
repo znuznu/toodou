@@ -18,6 +18,8 @@ import {
 } from '@chakra-ui/react';
 import { CheckIcon, CloseIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
+import { selectAll } from '../../utils/events';
+
 const selectBoardFromId = (state, id) => {
   return state.boards[id];
 };
@@ -123,6 +125,7 @@ const BoardHeader = (props) => {
               autoFocus
               focusBorderColor="gray.700"
               onKeyPress={(e) => e.key === 'Enter' && onSaveTitle()}
+              onFocus={selectAll}
             />
             <Box my="auto">
               <IconButton

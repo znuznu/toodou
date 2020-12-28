@@ -115,6 +115,7 @@ const Task = (props) => {
               onChange={onContentChange}
               autoFocus
               focusBorderColor="gray.700"
+              onKeyPress={(e) => e.key === 'Enter' && onSaveContent()}
             />
             <Flex flexDir="column" ml="3">
               <Tooltip label="Save the task" openDelay={500}>

@@ -46,6 +46,7 @@ const TaskListContent = (props) => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      mb={3}
                     >
                       <Task
                         key={`task-${taskId}`}

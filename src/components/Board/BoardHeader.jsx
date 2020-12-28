@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
@@ -22,7 +22,6 @@ const selectBoardFromId = (state, id) => {
   return state.boards[id];
 };
 
-// todo: global
 const selectState = (state, type) => state[type];
 
 const BoardHeader = (props) => {
@@ -35,6 +34,12 @@ const BoardHeader = (props) => {
     (state) => selectBoardFromId(state, id),
     shallowEqual
   );
+
+  useEffect(() => {
+    if (board) {
+      setTitle(board.title);
+    }
+  }, [board]);
 
   const boardsState = useSelector(
     (state) => selectState(state, 'boards'),
@@ -110,13 +115,14 @@ const BoardHeader = (props) => {
           <>
             <Input
               size="lg"
-              placeholder={board && board.title}
+              placeholder="Enter board title..."
               w="50"
               name="title"
               value={title}
               onChange={onTitleChange}
               autoFocus
               focusBorderColor="gray.700"
+              onKeyPress={(e) => e.key === 'Enter' && onSaveTitle()}
             />
             <Box my="auto">
               <IconButton

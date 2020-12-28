@@ -31,7 +31,7 @@ const TaskAdd = (props) => {
   );
 
   const onAddTask = () => {
-    dispatch(addTask(`A beautiful task...`));
+    dispatch(addTask('A beautiful task'));
     dispatch(addTaskToTaskList(taskListId, lastTaskId));
     setNewTaskId(lastTaskId);
   };

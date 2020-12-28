@@ -1,6 +1,6 @@
 import './Task.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
@@ -42,6 +42,12 @@ const Task = (props) => {
     (state) => selectTaskFromId(state, id),
     shallowEqual
   );
+
+  useEffect(() => {
+    if (task) {
+      setContent(task.content);
+    }
+  }, [task]);
 
   const onContentChange = (event) => {
     setContent(event.target.value);
@@ -104,7 +110,7 @@ const Task = (props) => {
         editMode.content ? (
           <Flex justifyContent="space-between">
             <Textarea
-              placeholder={task.content}
+              placeholder={'Enter task content...'}
               value={content}
               onChange={onContentChange}
               autoFocus

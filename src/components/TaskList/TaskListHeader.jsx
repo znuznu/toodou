@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -31,7 +31,18 @@ const TaskListHeader = (props) => {
   const [editMode, setEditMode] = useState({ title: isNew });
   const [title, setTitle] = useState('');
 
+  const taskList = useSelector(
+    (state) => selectTaskList(state, id),
+    shallowEqual
+  );
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (taskList) {
+      setTitle(taskList.title);
+    }
+  }, [taskList]);
 
   const toggleEditTitle = () => {
     setEditMode({ ...editMode, title: !editMode.title });
@@ -40,11 +51,6 @@ const TaskListHeader = (props) => {
   const onTitleChange = (event) => {
     setTitle(event.target.value);
   };
-
-  const taskList = useSelector(
-    (state) => selectTaskList(state, id),
-    shallowEqual
-  );
 
   const onSaveTitle = () => {
     dispatch(updateTaskListTitle(id, title));
@@ -94,12 +100,13 @@ const TaskListHeader = (props) => {
       {editMode.title ? (
         <>
           <Input
-            placeholder={taskList && taskList.title}
+            placeholder={'Enter list title...'}
             name="title"
             value={title}
             onChange={onTitleChange}
             autoFocus
             focusBorderColor="gray.700"
+            onKeyPress={(e) => e.key === 'Enter' && onSaveTitle()}
           />
           <Box my="auto" display="flex">
             <IconButton

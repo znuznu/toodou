@@ -28,7 +28,7 @@ const TaskListAdd = (props) => {
 
   const onAddTaskList = () => {
     const nextId = getNewNextId(taskListsState);
-    dispatch(addTaskList(`An incredible title...`));
+    dispatch(addTaskList('Title'));
     dispatch(addTaskListToBoard(boardId, nextId));
     setNewTaskListId(nextId);
   };

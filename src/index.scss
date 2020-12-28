@@ -1,0 +1,16 @@
+html,
+body,
+#root {
+  height: 100%;
+
+  overflow-x: hidden;
+}
+
+#root {
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}

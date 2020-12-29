@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import PropTypes from 'prop-types';
 
-import { Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 
 import { moveTaskList } from '../../actions/board.action';
 import { moveTaskSelf, moveTaskBetween } from '../../actions/taskList.action';
@@ -68,12 +68,7 @@ const BoardContent = (props) => {
             type="taskList"
           >
             {(provided) => (
-              <div
-                ref={provided.innerRef}
-                style={{
-                  display: 'flex',
-                }}
-              >
+              <Flex ref={provided.innerRef}>
                 {board.taskLists.map((taskListId, index) => (
                   <Draggable
                     key={taskListId}
@@ -81,7 +76,7 @@ const BoardContent = (props) => {
                     index={index}
                   >
                     {(provided) => (
-                      <div
+                      <Box
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -92,12 +87,12 @@ const BoardContent = (props) => {
                           key={`tlid-${taskListId}`}
                           isNew={newTaskListId === taskListId}
                         ></TaskList>
-                      </div>
+                      </Box>
                     )}
                   </Draggable>
                 ))}
                 {provided.placeholder}
-              </div>
+              </Flex>
             )}
           </Droppable>
         </DragDropContext>

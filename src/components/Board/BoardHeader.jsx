@@ -8,14 +8,7 @@ import { deleteBoards, updateTitleBoard } from '../../actions/board.action';
 import { deleteTaskLists } from '../../actions/taskList.action';
 import { deleteTasks } from '../../actions/task.action';
 
-import {
-  Box,
-  Flex,
-  Heading,
-  IconButton,
-  Input,
-  Tooltip,
-} from '@chakra-ui/react';
+import { Flex, Heading, IconButton, Input, Tooltip } from '@chakra-ui/react';
 import { CheckIcon, CloseIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 import { selectAll } from '../../helpers/events';
@@ -84,27 +77,29 @@ const BoardHeader = (props) => {
   const Preview = () => {
     return (
       <>
-        <Heading>{board && board.title}</Heading>
-        <Flex>
-          <IconButton
-            aria-label="Edit the board"
-            mx="2"
-            icon={
-              <Tooltip label="Edit the board" openDelay={500}>
-                <EditIcon />
-              </Tooltip>
-            }
-            onClick={toggleEditTitle}
-          />
-          <IconButton
-            aria-label="Delete the board"
-            icon={
-              <Tooltip label="Delete the board" openDelay={500}>
-                <DeleteIcon />
-              </Tooltip>
-            }
-            onClick={onDelete}
-          />
+        <Flex mb="4">
+          <Heading isTruncated>{board && board.title}</Heading>
+          <Flex>
+            <IconButton
+              aria-label="Edit the board"
+              mx="2"
+              icon={
+                <Tooltip label="Edit the board" openDelay={500}>
+                  <EditIcon />
+                </Tooltip>
+              }
+              onClick={toggleEditTitle}
+            />
+            <IconButton
+              aria-label="Delete the board"
+              icon={
+                <Tooltip label="Delete the board" openDelay={500}>
+                  <DeleteIcon />
+                </Tooltip>
+              }
+              onClick={onDelete}
+            />
+          </Flex>
         </Flex>
       </>
     );
@@ -112,13 +107,12 @@ const BoardHeader = (props) => {
 
   return (
     <>
-      <Flex mb="4">
-        {editMode.title ? (
-          <>
+      {editMode.title ? (
+        <>
+          <Flex mb="3" maxW="sm">
             <Input
               size="lg"
               placeholder="Enter board title..."
-              w="50"
               name="title"
               value={title}
               onChange={onTitleChange}
@@ -127,7 +121,7 @@ const BoardHeader = (props) => {
               onKeyPress={(e) => e.key === 'Enter' && onSaveTitle()}
               onFocus={selectAll}
             />
-            <Box my="auto">
+            <Flex my="auto">
               <IconButton
                 aria-label="Save the title"
                 mx="2"
@@ -147,12 +141,12 @@ const BoardHeader = (props) => {
                 }
                 onClick={toggleEditTitle}
               />
-            </Box>
-          </>
-        ) : (
-          <Preview />
-        )}
-      </Flex>
+            </Flex>
+          </Flex>
+        </>
+      ) : (
+        <Preview />
+      )}
     </>
   );
 };

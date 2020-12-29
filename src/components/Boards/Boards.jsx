@@ -36,6 +36,7 @@ const Boards = () => {
     } else if (currentBoardIdIsNoMore) {
       // todo: set the previous id instead of the first one
       setCurrentBoardId(boardsIdArray[0]);
+      setIsNewBoard(false);
     }
   }, [boardsState]);
 

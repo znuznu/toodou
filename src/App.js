@@ -3,8 +3,10 @@ import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/react';
+
+import theme from './style/theme';
 
 import Boards from './components/Boards/Boards';
 import Header from './components/Header/Header';
@@ -17,8 +19,8 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <Flex flexDir="column" h="100%">
-            <Header title="Toodou."></Header>
-            <Boards></Boards>
+            <Header title="Toodou." />
+            <Boards />
           </Flex>
         </ChakraProvider>
       </PersistGate>

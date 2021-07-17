@@ -97,6 +97,7 @@ const BoardHeader = (props) => {
                   <DeleteIcon />
                 </Tooltip>
               }
+              _hover={{ color: 'red.500' }}
               onClick={onDelete}
             />
           </Flex>

@@ -8,11 +8,9 @@ const Header = (props) => {
   const { title } = props;
 
   return (
-    <>
-      <Heading as="h1" size="3xl" textAlign={'end'} py="6" pr="6">
-        {title}
-      </Heading>
-    </>
+    <Heading as="h1" size="3xl" textAlign={'end'} py="6" pr="6">
+      {title} 📝
+    </Heading>
   );
 };
 

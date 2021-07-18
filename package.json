@@ -5,7 +5,7 @@
   "author": "znu (https://github.com/znuznu)",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
-  "homepage": "http://znuznu.github.io/toodou",
+  "homepage": "https://toodou.vercel.app/",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^1.0.2",

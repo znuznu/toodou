@@ -19,9 +19,8 @@ const selectNextTaskId = (state) => {
 const TaskAdd = (props) => {
   const { taskListId, setNewTaskId } = props;
 
-  const color = useColorModeValue('gray.400', '#51555e');
-  const bgHover = useColorModeValue('gray.100', '#2C323D');
-  const colorHover = useColorModeValue('gray.800', '#F0F0F1');
+  const bgHover = useColorModeValue('gray.100', 'sith.700');
+  const colorHover = useColorModeValue('sith.900', '#F0F0F1');
 
   const dispatch = useDispatch();
 
@@ -38,12 +37,10 @@ const TaskAdd = (props) => {
 
   return (
     <Box
-      boxShadow="base"
       borderRadius="lg"
       overflow="hidden"
       p="3"
       mb={3}
-      color={color}
       _hover={{ bg: bgHover, color: colorHover }}
       cursor="pointer"
       onClick={onAddTask}

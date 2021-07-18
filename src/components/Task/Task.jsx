@@ -1,5 +1,3 @@
-import './Task.scss';
-
 import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
@@ -31,10 +29,11 @@ const Task = (props) => {
   const [editMode, setEditMode] = useState({ content: isNew });
   const [content, setContent] = useState('');
 
-  const bg = useColorModeValue('white', 'gray.800');
-  const bgDraggedHover = useColorModeValue('gray.100', '#2C323D');
-  const colorBtn = useColorModeValue('gray.400', '#51555e');
-  const colorBtnHover = useColorModeValue('gray.800', '#F0F0F1');
+  const bg = useColorModeValue('white', 'sith.800');
+  const bgHover = useColorModeValue('gray.100', 'sith.700');
+  const bgDragged = useColorModeValue('#eeeafe', 'sith.700');
+  const colorBtn = useColorModeValue('gray.400', '#6d6d6d');
+  const colorBtnHover = useColorModeValue('sith.900', '#F0F0F1');
 
   const dispatch = useDispatch();
 
@@ -69,9 +68,9 @@ const Task = (props) => {
 
   const Preview = () => {
     return (
-      <Flex justifyContent="space-between" className="task">
+      <Flex justifyContent="space-between">
         <Text>{task.content}</Text>
-        <Flex flexDir="column" ml="3" className="task-buttons">
+        <Flex flexDir="column" ml="3">
           <Tooltip label="Edit the task" openDelay={500}>
             <EditIcon
               mb={3}
@@ -98,13 +97,12 @@ const Task = (props) => {
 
   return (
     <Box
-      boxShadow="base"
+      boxShadow="0 1px 8px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)"
       borderRadius="lg"
       overflow="hidden"
       p="3"
       mb={3}
-      _hover={{ bg: bgDraggedHover }}
-      bg={isDragged ? bgDraggedHover : bg}
+      bg={isDragged ? bgDragged : bg}
     >
       {task ? (
         editMode.content ? (

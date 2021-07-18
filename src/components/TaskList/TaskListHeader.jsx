@@ -68,7 +68,7 @@ const TaskListHeader = (props) => {
   const Preview = () => {
     return (
       <>
-        <Heading as="h1" size="lg" isTruncated>
+        <Heading as="h1" size="lg" alignSelf="end" margin="0" isTruncated>
           {taskList && taskList.title}
         </Heading>
         <Box ml={2} display="flex">
@@ -85,6 +85,7 @@ const TaskListHeader = (props) => {
           />
           <IconButton
             aria-label="Delete the list"
+            _hover={{ color: 'red.500' }}
             icon={
               <Tooltip label="Delete the list" openDelay={500}>
                 <DeleteIcon />

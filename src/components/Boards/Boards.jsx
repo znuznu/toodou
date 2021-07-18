@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
+import { Link as RrdLink } from 'react-router-dom';
+
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, Tooltip, IconButton, Link } from '@chakra-ui/react';
+import { InfoIcon, QuestionIcon } from '@chakra-ui/icons';
 
 import BoardAdd from './BoardAdd';
 import Board from '../Board/Board';
-import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+// import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import BoardSelector from './BoardSelector';
 
 const selectState = (state, type) => state[type];
@@ -53,7 +56,28 @@ const Boards = () => {
             setCurrentBoardId={setCurrentBoardId}
             setIsNewBoard={setIsNewBoard}
           />
-          <ThemeSwitcher />
+          {/* Remove for now */}
+          {/* <ThemeSwitcher /> */}
+          {/* <IconButton
+            ml="6"
+            icon={
+              <Tooltip label="Get help" openDelay={200}>
+                <QuestionIcon />
+              </Tooltip>
+            }
+            // onClick={}
+          /> */}
+          <IconButton
+            ml="6"
+            icon={
+              <Tooltip label="About" openDelay={200}>
+                <Link as={RrdLink} to="/about">
+                  <InfoIcon />
+                </Link>
+              </Tooltip>
+            }
+            // onClick={}
+          />
         </Flex>
         {Object.keys(boardsState).length ? (
           <Board

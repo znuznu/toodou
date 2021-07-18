@@ -1,6 +1,6 @@
 # Toodou
 
-A task manager made with **React**, **Redux**, **rbd**, **redux-persist** and **Chakra UI**
+A task manager made with **React**, **Redux**, **rbd**, **redux-persist**, **Chakra UI** and **Twemoji**.
 
 You can try the project [here](https://znuznu.github.io/toodou).
 

@@ -40,8 +40,8 @@ export function getNewNextId(obj) {
 /**
  * Filter an Object containing multiple Object with an `id` field.
  *
- * @param {object} obj        - the object to filter
- * @param {number[]} idsToRemove - id of the objects to remove in `obj`
+ * @param {object} obj            - the object to filter
+ * @param {number[]} idsToRemove  - id of the objects to remove in `obj`
  */
 export function filterObject(obj, idsToRemove) {
   let newObj = {};

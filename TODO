@@ -1,0 +1,11 @@
+[x] About page
+[ ] Help page
+[x] emoji (https://medium.com/@seanmcp/%EF%B8%8F-how-to-use-emojis-in-react-d23bbf608bf7)
+[ ] dark theme
+[ ] remove text inside tasks
+[ ] fix bugs related to tasks
+[x] add a new color for text selection
+[ ] add i18n fr - eng
+[ ] add boards export as json
+[ ] use index.jsx instead of for example Something/Something.jsx
+[ ] use a menu instead of edit and delete

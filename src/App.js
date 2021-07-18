@@ -1,30 +1,42 @@
 import React from 'react';
 
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { ChakraProvider } from '@chakra-ui/react';
-import { Flex } from '@chakra-ui/react';
 
 import theme from './style/theme';
 
-import Boards from './components/Boards/Boards';
 import Header from './components/Header/Header';
+
+import Home from './pages/Home';
+import About from './pages/About';
 
 import { store, persistor } from './store/store';
 
 function App() {
   return (
-    <ReduxProvider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+    <Router>
+      <Switch>
         <ChakraProvider theme={theme}>
-          <Flex flexDir="column" h="100%">
-            <Header title="Toodou." />
-            <Boards />
-          </Flex>
+          <Header title="Toodou." />
+
+          <Route path="/about">
+            <About />
+          </Route>
+
+          <Route exact path="/">
+            <ReduxProvider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                <Home />
+              </PersistGate>
+            </ReduxProvider>
+          </Route>
         </ChakraProvider>
-      </PersistGate>
-    </ReduxProvider>
+      </Switch>
+    </Router>
   );
 }
 

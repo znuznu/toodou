@@ -19,7 +19,6 @@ const selectNextTaskId = (state) => {
 const TaskAdd = (props) => {
   const { taskListId, setNewTaskId } = props;
 
-  const color = useColorModeValue('gray.400', '#6d6d6d');
   const bgHover = useColorModeValue('gray.100', 'sith.700');
   const colorHover = useColorModeValue('sith.900', '#F0F0F1');
 

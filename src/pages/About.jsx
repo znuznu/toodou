@@ -44,6 +44,8 @@ const About = () => {
         .
       </Text>
 
+      <Text mt="2rem">Each board is saved directly in the browser.</Text>
+
       <Text margin="2rem auto">
         The project is copyright under MIT license and the source code is
         available for everyone,{' '}
@@ -57,6 +59,7 @@ const About = () => {
         </Link>
         .
       </Text>
+
       <Flex ml="auto">
         <RrdLink to="/" fontWeight="bold">
           <ArrowBackIcon fontSize={{ base: '37px', md: '50px' }} />

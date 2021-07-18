@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -23,16 +28,20 @@ function App() {
         <ChakraProvider theme={theme}>
           <Header title="Toodou." />
 
-          <Route path="/about">
+          <Route path={'/about'}>
             <About />
           </Route>
 
-          <Route exact path="/">
-            <ReduxProvider store={store}>
-              <PersistGate loading={null} persistor={persistor}>
+          <ReduxProvider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Route exact path={'/'}>
                 <Home />
-              </PersistGate>
-            </ReduxProvider>
+              </Route>
+            </PersistGate>
+          </ReduxProvider>
+
+          <Route path="*">
+            <Redirect to="/" />
           </Route>
         </ChakraProvider>
       </Switch>

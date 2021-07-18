@@ -58,7 +58,7 @@ const Boards = () => {
           />
           {/* Remove for now */}
           {/* <ThemeSwitcher /> */}
-          <IconButton
+          {/* <IconButton
             ml="6"
             icon={
               <Tooltip label="Get help" openDelay={200}>
@@ -66,9 +66,9 @@ const Boards = () => {
               </Tooltip>
             }
             // onClick={}
-          />
+          /> */}
           <IconButton
-            ml="2"
+            ml="6"
             icon={
               <Tooltip label="About" openDelay={200}>
                 <Link as={RrdLink} to="/about">

@@ -22,6 +22,10 @@ const theme = extendTheme({
         flexDir: 'column',
         color: mode('#222222', 'white')(props),
       },
+      '::selection': {
+        'background-color': mode('#222222', 'white')(props),
+        color: mode('white', '#222222')(props),
+      },
     }),
   },
   colors: {

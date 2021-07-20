@@ -1,0 +1,17 @@
+{
+  "board.header.about": "About",
+  "board.header.lang-switch": "Switch language",
+  "board.tooltip.create": "Add a new board",
+  "board.tooltip.edit": "Edit the board",
+  "board.tooltip.delete": "Delete the board",
+  "task.tooltip.edit": "Edit the task",
+  "task.tooltip.delete": "Delete the task",
+  "task.tooltip.save": "Save the task",
+  "task.tooltip.undo-editing": "Undo edit",
+  "task.add-button": "Add a new task",
+  "tasklist.tooltip.title-edit": "Edit the title",
+  "tasklist.tooltip.delete": "Delete the list",
+  "tasklist.title-save": "Save the title",
+  "tasklist.tooltip.undo-editing": "Undo edit",
+  "tasklist.tooltip.add": "Add a new task list"
+}

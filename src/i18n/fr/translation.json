@@ -1,0 +1,17 @@
+{
+  "board.header.about": "A propos",
+  "board.header.lang-switch": "Changer la language",
+  "board.tooltip.create": "Ajouter un tableau",
+  "board.tooltip.edit": "Editer le tableau",
+  "board.tooltip.delete": "Supprimer le tableau",
+  "task.tooltip.edit": "Editer la tâche",
+  "task.tooltip.delete": "Supprimer la tâche",
+  "task.tooltip.save": "Enregistrer la tâche",
+  "task.tooltip.undo-editing": "Annuler l'édition",
+  "task.add-button": "Ajouter une liste",
+  "tasklist.tooltip.title-edit": "Editer la liste",
+  "tasklist.tooltip.delete": "Supprimer la liste",
+  "tasklist.title-save": "Enregistrer le titre",
+  "tasklist.tooltip.undo-editing": "Annuler l'édition",
+  "tasklist.tooltip.add": "Ajouter une liste"
+}

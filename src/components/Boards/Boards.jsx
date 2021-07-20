@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { Link as RrdLink } from 'react-router-dom';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { Flex, Heading, Tooltip, IconButton, Link } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Heading,
+  Tooltip,
+  IconButton,
+  Link,
+} from '@chakra-ui/react';
 import { InfoIcon, QuestionIcon } from '@chakra-ui/icons';
 
 import BoardAdd from './BoardAdd';
@@ -25,6 +34,8 @@ const Boards = () => {
     shallowEqual
   );
 
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     const boardsIdArray = Object.keys(boardsState).map(Number);
 
@@ -43,6 +54,12 @@ const Boards = () => {
     }
   }, [boardsState]);
 
+  const switchLanguage = () => {
+    const nextLanguage = i18n.language === 'en' ? 'fr' : 'en';
+
+    i18n.changeLanguage(nextLanguage);
+  };
+
   return (
     <>
       <Flex mx="6" flexDir="column" h="100%">
@@ -58,26 +75,26 @@ const Boards = () => {
           />
           {/* Remove for now */}
           {/* <ThemeSwitcher /> */}
-          {/* <IconButton
-            ml="6"
-            icon={
-              <Tooltip label="Get help" openDelay={200}>
-                <QuestionIcon />
-              </Tooltip>
-            }
-            // onClick={}
-          /> */}
           <IconButton
             ml="6"
+            aria-label={t('board.header.about')}
             icon={
-              <Tooltip label="About" openDelay={200}>
+              <Tooltip label={t('board.header.about')} openDelay={200}>
                 <Link as={RrdLink} to="/about">
                   <InfoIcon />
                 </Link>
               </Tooltip>
             }
-            // onClick={}
           />
+          <Button
+            ml="2"
+            aria-label={t('board.header.lang-switch')}
+            onClick={() => switchLanguage()}
+          >
+            <Tooltip label={t('board.header.lang-switch')} openDelay={200}>
+              {i18n.language === 'en' ? 'EN' : 'FR'}
+            </Tooltip>
+          </Button>
         </Flex>
         {Object.keys(boardsState).length ? (
           <Board

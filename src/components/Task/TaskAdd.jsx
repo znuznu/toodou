@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import PropTypes from 'prop-types';
 
 import { AddIcon } from '@chakra-ui/icons';
@@ -29,6 +31,8 @@ const TaskAdd = (props) => {
     shallowEqual
   );
 
+  const { t } = useTranslation();
+
   const onAddTask = () => {
     dispatch(addTask('A beautiful task'));
     dispatch(addTaskToTaskList(taskListId, lastTaskId));
@@ -48,7 +52,7 @@ const TaskAdd = (props) => {
       <Flex>
         <AddIcon my="auto" />
         <Text my="auto" ml="2">
-          Add a new task
+          {t('task.add-button')}
         </Text>
       </Flex>
     </Box>

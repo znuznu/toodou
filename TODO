@@ -5,7 +5,7 @@
 [ ] remove text inside tasks
 [ ] fix bugs related to tasks
 [x] add a new color for text selection
-[ ] add i18n fr - eng
+[~] add i18n fr - eng
 [ ] add boards export as json
 [ ] use index.jsx instead of for example Something/Something.jsx
 [ ] use a menu instead of edit and delete

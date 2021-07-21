@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import PropTypes from 'prop-types';
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
@@ -26,6 +28,8 @@ const TaskListAdd = (props) => {
     shallowEqual
   );
 
+  const { t } = useTranslation();
+
   const onAddTaskList = () => {
     const nextId = getNewNextId(taskListsState);
     dispatch(addTaskList('Title'));
@@ -34,13 +38,15 @@ const TaskListAdd = (props) => {
   };
 
   return (
-    <Tooltip label="Add a new task list" openDelay={500}>
-      <IconButton
-        aria-label="Add a task list"
-        icon={<AddIcon />}
-        onClick={onAddTaskList}
-      />
-    </Tooltip>
+    <IconButton
+      aria-label={t('tasklist.tooltip.add')}
+      icon={
+        <Tooltip label={t('tasklist.tooltip.add')} openDelay={500}>
+          <AddIcon />
+        </Tooltip>
+      }
+      onClick={onAddTaskList}
+    />
   );
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import PropTypes from 'prop-types';
@@ -18,6 +20,8 @@ const BoardAdd = (props) => {
 
   const dispatch = useDispatch();
 
+  const { t } = useTranslation();
+
   const boardsState = useSelector(
     (state) => selectState(state, 'boards'),
     shallowEqual
@@ -31,14 +35,20 @@ const BoardAdd = (props) => {
   };
 
   return (
-    <Tooltip shouldWrapChildren label="Add a new board" openDelay={500}>
-      <IconButton
-        aria-label="Add a new Board"
-        icon={<AddIcon />}
-        onClick={addBoard}
-        outline="none"
-      />
-    </Tooltip>
+    <IconButton
+      aria-label={t('board.tooltip.create')}
+      icon={
+        <Tooltip
+          shouldWrapChildren
+          label={t('board.tooltip.create')}
+          openDelay={500}
+        >
+          <AddIcon />
+        </Tooltip>
+      }
+      onClick={addBoard}
+      outline="none"
+    />
   );
 };
 

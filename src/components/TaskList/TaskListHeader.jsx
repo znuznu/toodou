@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import PropTypes from 'prop-types';
 
 import {
@@ -40,6 +42,8 @@ const TaskListHeader = (props) => {
 
   const dispatch = useDispatch();
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (taskList) {
       setTitle(taskList.title);
@@ -73,21 +77,21 @@ const TaskListHeader = (props) => {
         </Heading>
         <Box ml={2} display="flex">
           <IconButton
-            aria-label="Edit the title"
+            aria-label={t('tasklist.tooltip.title-edit')}
             outline="none"
             mr="2"
             icon={
-              <Tooltip label="Edit the title" openDelay={500}>
+              <Tooltip label={t('tasklist.tooltip.title-edit')} openDelay={500}>
                 <EditIcon />
               </Tooltip>
             }
             onClick={toggleEditTitle}
           />
           <IconButton
-            aria-label="Delete the list"
+            aria-label={t('tasklist.tooltip.delete')}
             _hover={{ color: 'red.500' }}
             icon={
-              <Tooltip label="Delete the list" openDelay={500}>
+              <Tooltip label={t('tasklist.tooltip.delete')} openDelay={500}>
                 <DeleteIcon />
               </Tooltip>
             }
@@ -103,7 +107,7 @@ const TaskListHeader = (props) => {
       {editMode.title ? (
         <>
           <Input
-            placeholder={'Enter list title...'}
+            placeholder={t('tasklist.placeholder.title')}
             name="title"
             value={title}
             onChange={onTitleChange}
@@ -115,19 +119,22 @@ const TaskListHeader = (props) => {
           />
           <Box my="auto" display="flex">
             <IconButton
-              aria-label="Save the title"
+              aria-label={t('tasklist.title-save')}
               mx="2"
               icon={
-                <Tooltip label="Save the title" openDelay={500}>
+                <Tooltip label={t('tasklist.title-save')} openDelay={500}>
                   <CheckIcon />
                 </Tooltip>
               }
               onClick={onSaveTitle}
             />
             <IconButton
-              aria-label="Undo edit"
+              aria-label={t('tasklist.tooltip.undo-editing')}
               icon={
-                <Tooltip label="Undo edit" openDelay={500}>
+                <Tooltip
+                  label={t('tasklist.tooltip.undo-editing')}
+                  openDelay={500}
+                >
                   <CloseIcon />
                 </Tooltip>
               }

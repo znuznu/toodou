@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import PropTypes from 'prop-types';
@@ -29,6 +31,8 @@ const BoardHeader = (props) => {
     (state) => selectBoardFromId(state, id),
     shallowEqual
   );
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (board) {
@@ -81,19 +85,19 @@ const BoardHeader = (props) => {
           <Heading isTruncated>{board && board.title}</Heading>
           <Flex>
             <IconButton
-              aria-label="Edit the board"
+              aria-label={t('board.tooltip.edit')}
               mx="2"
               icon={
-                <Tooltip label="Edit the board" openDelay={500}>
+                <Tooltip label={t('board.tooltip.edit')} openDelay={500}>
                   <EditIcon />
                 </Tooltip>
               }
               onClick={toggleEditTitle}
             />
             <IconButton
-              aria-label="Delete the board"
+              aria-label={t('board.tooltip.delete')}
               icon={
-                <Tooltip label="Delete the board" openDelay={500}>
+                <Tooltip label={t('board.tooltip.delete')} openDelay={500}>
                   <DeleteIcon />
                 </Tooltip>
               }
@@ -113,7 +117,7 @@ const BoardHeader = (props) => {
           <Flex mb="3" maxW="sm">
             <Input
               size="lg"
-              placeholder="Enter board title..."
+              placeholder={t('board.placeholder.title')}
               name="title"
               value={title}
               onChange={onTitleChange}
@@ -124,19 +128,25 @@ const BoardHeader = (props) => {
             />
             <Flex my="auto">
               <IconButton
-                aria-label="Save the title"
+                aria-label={t('board.tooltip.title-save')}
                 mx="2"
                 icon={
-                  <Tooltip label="Save the title" openDelay={500}>
+                  <Tooltip
+                    label={t('board.tooltip.title-save')}
+                    openDelay={500}
+                  >
                     <CheckIcon />
                   </Tooltip>
                 }
                 onClick={onSaveTitle}
               />
               <IconButton
-                aria-label="Undo edit"
+                aria-label={t('board.tooltip.undo-editing')}
                 icon={
-                  <Tooltip label="Undo edit" openDelay={500}>
+                  <Tooltip
+                    label={t('board.tooltip.undo-editing')}
+                    openDelay={500}
+                  >
                     <CloseIcon />
                   </Tooltip>
                 }

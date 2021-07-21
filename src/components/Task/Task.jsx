@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import { CloseIcon, CheckIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
@@ -30,7 +32,6 @@ const Task = (props) => {
   const [content, setContent] = useState('');
 
   const bg = useColorModeValue('white', 'sith.800');
-  const bgHover = useColorModeValue('gray.100', 'sith.700');
   const bgDragged = useColorModeValue('#eeeafe', 'sith.700');
   const colorBtn = useColorModeValue('gray.400', '#6d6d6d');
   const colorBtnHover = useColorModeValue('sith.900', '#F0F0F1');
@@ -41,6 +42,8 @@ const Task = (props) => {
     (state) => selectTaskFromId(state, id),
     shallowEqual
   );
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (task) {
@@ -71,19 +74,19 @@ const Task = (props) => {
       <Flex justifyContent="space-between">
         <Text>{task.content}</Text>
         <Flex flexDir="column" ml="3">
-          <Tooltip label="Edit the task" openDelay={500}>
+          <Tooltip label={t('task.tooltip.edit')} openDelay={500}>
             <EditIcon
               mb={3}
-              aria-label="Edit the task"
+              aria-label={t('task.tooltip.edit')}
               cursor="pointer"
               color={colorBtn}
               _hover={{ color: colorBtnHover }}
               onClick={toggleEditContent}
             />
           </Tooltip>
-          <Tooltip label="Delete the task" openDelay={500}>
+          <Tooltip label={t('task.tooltip.delete')} openDelay={500}>
             <DeleteIcon
-              aria-label="Delete the task"
+              aria-label={t('task.tooltip.delete')}
               cursor="pointer"
               color={colorBtn}
               _hover={{ color: colorBtnHover }}
@@ -108,7 +111,7 @@ const Task = (props) => {
         editMode.content ? (
           <Flex justifyContent="space-between">
             <Textarea
-              placeholder={'Enter task content...'}
+              placeholder={t('task.placeholder.content')}
               value={content}
               onChange={onContentChange}
               autoFocus
@@ -116,19 +119,19 @@ const Task = (props) => {
               onKeyPress={(e) => e.key === 'Enter' && onSaveContent()}
             />
             <Flex flexDir="column" ml="3">
-              <Tooltip label="Save the task" openDelay={500}>
+              <Tooltip label={t('task.tooltip.save')} openDelay={500}>
                 <CheckIcon
                   mb={3}
-                  aria-label="Save the task"
+                  aria-label={t('task.tooltip.save')}
                   cursor="pointer"
                   color={colorBtn}
                   _hover={{ color: colorBtnHover }}
                   onClick={onSaveContent}
                 />
               </Tooltip>
-              <Tooltip label="Undo edit" openDelay={500}>
+              <Tooltip label={t('task.tooltip.undo-editing')} openDelay={500}>
                 <CloseIcon
-                  aria-label="Undo edit"
+                  aria-label={t('task.tooltip.undo-editing')}
                   cursor="pointer"
                   color={colorBtn}
                   _hover={{ color: colorBtnHover }}

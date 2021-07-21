@@ -1,11 +1,15 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { Link as RrdLink } from 'react-router-dom';
 
 import { Flex, Text, Link } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
     <Flex
       flexDir="column"
@@ -15,13 +19,10 @@ const About = () => {
       maxW="800px"
       textAlign="justify"
     >
-      <Text margin="auto">
-        Toodou is a task manager that allows you to create boards full of task
-        lists.
-      </Text>
+      <Text margin="auto">{t('about.line-one')}</Text>
 
       <Text margin="2rem auto 0">
-        It was made with{' '}
+        {t('about.line-two')}{' '}
         <Link href="https://reactjs.org/" isExternal fontWeight="bold">
           React
         </Link>
@@ -37,25 +38,24 @@ const About = () => {
         <Link href="https://react-redux.js.org/" isExternal fontWeight="bold">
           React Redux
         </Link>{' '}
-        and{' '}
+        {t('word.and')}{' '}
         <Link href="https://chakra-ui.com/" isExternal fontWeight="bold">
           Chakra
         </Link>
         .
       </Text>
 
-      <Text mt="2rem">Each board is saved directly in the browser.</Text>
+      <Text mt="2rem"> {t('about.line-three')}</Text>
 
       <Text margin="2rem auto">
-        The project is copyright under MIT license and the source code is
-        available for everyone,{' '}
+        {t('about.line-four')}{' '}
         <Link
           href="https://github.com/znuznu/toodou"
           isExternal
           fontWeight="bold"
           color="yellow.400"
         >
-          here
+          {t('word.here')}
         </Link>
         .
       </Text>

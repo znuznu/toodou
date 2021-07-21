@@ -107,7 +107,7 @@ const TaskListHeader = (props) => {
       {editMode.title ? (
         <>
           <Input
-            placeholder={'Enter list title...'}
+            placeholder={t('tasklist.placeholder.title')}
             name="title"
             value={title}
             onChange={onTitleChange}
@@ -131,7 +131,10 @@ const TaskListHeader = (props) => {
             <IconButton
               aria-label={t('tasklist.tooltip.undo-editing')}
               icon={
-                <Tooltip label={t('tasklist.tooltip.undo-editing')} openDelay={500}>
+                <Tooltip
+                  label={t('tasklist.tooltip.undo-editing')}
+                  openDelay={500}
+                >
                   <CloseIcon />
                 </Tooltip>
               }

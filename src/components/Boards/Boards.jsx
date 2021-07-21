@@ -14,7 +14,7 @@ import {
   IconButton,
   Link,
 } from '@chakra-ui/react';
-import { InfoIcon, QuestionIcon } from '@chakra-ui/icons';
+import { InfoIcon } from '@chakra-ui/icons';
 
 import BoardAdd from './BoardAdd';
 import Board from '../Board/Board';

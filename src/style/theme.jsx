@@ -11,8 +11,6 @@ const theme = extendTheme({
       '#root': {
         overflow: 'hidden',
         background:
-          props.colorMode === 'light' ? 'rgb(231,244,254)' : 'rgb(181,110,146)',
-        background:
           props.colorMode === 'light'
             ? 'linear-gradient(320deg, rgba(231,244,254,1) 4%, rgba(255,255,255,1) 100%)'
             : 'linear-gradient(320deg, rgba(181,110,146,1) 0%, rgba(80,46,158,1) 68%, rgba(26,61,86,1) 100%)',

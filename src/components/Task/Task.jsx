@@ -111,7 +111,7 @@ const Task = (props) => {
         editMode.content ? (
           <Flex justifyContent="space-between">
             <Textarea
-              placeholder={'Enter task content...'}
+              placeholder={t('task.placeholder.content')}
               value={content}
               onChange={onContentChange}
               autoFocus

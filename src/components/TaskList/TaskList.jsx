@@ -2,13 +2,15 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Box } from '@chakra-ui/react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 
 import TaskListHeader from './TaskListHeader';
 import TaskListContent from './TaskListContent';
 
 const TaskList = (props) => {
   const { id, boardId, isNew } = props;
+
+  const bg = useColorModeValue('#f8fafb', 'sith.600');
 
   return (
     <Box
@@ -20,7 +22,7 @@ const TaskList = (props) => {
       py="3"
       mr="4"
       display="inline-table"
-      backgroundColor="#f8fafb"
+      backgroundColor={bg}
     >
       <TaskListHeader id={id} boardId={boardId} isNew={isNew} />
       <TaskListContent id={id} />

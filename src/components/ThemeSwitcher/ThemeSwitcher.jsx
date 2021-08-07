@@ -15,7 +15,9 @@ const ThemeSwitcher = () => {
         </Tooltip>
       }
       onClick={toggleColorMode}
-      ml="6"
+      mx="6"
+      size="36"
+      variant="unstyled"
     />
   );
 };

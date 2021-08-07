@@ -23,24 +23,22 @@ const BoardSelector = (props) => {
   };
 
   return (
-    <>
-      <Select
-        my="auto"
-        mr="3"
-        ml="auto"
-        w="auto"
-        value={currentBoardId}
-        onChange={onSelectChange}
-        variant="filled"
-        focusBorderColor="gray.700"
-      >
-        {Object.keys(boardsState).map((boardId) => (
-          <option value={boardId} key={`board-select-${boardId}`}>
-            {boardsState[boardId].title}
-          </option>
-        ))}
-      </Select>
-    </>
+    <Select
+      my="auto"
+      mr="3"
+      ml="auto"
+      w="auto"
+      value={currentBoardId}
+      onChange={onSelectChange}
+      variant="filled"
+      focusBorderColor="gray.700"
+    >
+      {Object.keys(boardsState).map((boardId) => (
+        <option value={boardId} key={`board-select-${boardId}`}>
+          {boardsState[boardId].title}
+        </option>
+      ))}
+    </Select>
   );
 };
 

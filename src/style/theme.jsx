@@ -10,10 +10,7 @@ const theme = extendTheme({
       },
       '#root': {
         overflow: 'hidden',
-        background:
-          props.colorMode === 'light'
-            ? 'white'
-            : 'linear-gradient(320deg, rgba(181,110,146,1) 0%, rgba(80,46,158,1) 68%, rgba(26,61,86,1) 100%)',
+        background: props.colorMode === 'light' ? 'white' : 'sith.1000',
       },
       body: {
         display: 'flex',
@@ -28,9 +25,11 @@ const theme = extendTheme({
   },
   colors: {
     sith: {
+      600: '#272728',
       700: '#222222',
       800: '#252525',
       900: '#1c1c1c',
+      1000: '#18181b',
     },
   },
 });

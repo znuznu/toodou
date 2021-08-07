@@ -31,7 +31,7 @@ const Task = (props) => {
   const [editMode, setEditMode] = useState({ content: isNew });
   const [content, setContent] = useState('');
 
-  const bg = useColorModeValue('white', 'sith.800');
+  const bg = useColorModeValue('white', 'sith.1000');
   const bgDragged = useColorModeValue('#eeeafe', 'sith.700');
   const colorBtn = useColorModeValue('gray.400', '#6d6d6d');
   const colorBtnHover = useColorModeValue('sith.900', '#F0F0F1');
@@ -100,7 +100,6 @@ const Task = (props) => {
 
   return (
     <Box
-      // boxShadow="0 1px 8px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)"
       borderRadius="lg"
       overflow="hidden"
       p="3"

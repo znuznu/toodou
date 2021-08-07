@@ -18,7 +18,6 @@ import { InfoIcon } from '@chakra-ui/icons';
 
 import BoardAdd from './BoardAdd';
 import Board from '../Board/Board';
-// import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import BoardSelector from './BoardSelector';
 
 const selectState = (state, type) => state[type];
@@ -73,8 +72,6 @@ const Boards = () => {
             setCurrentBoardId={setCurrentBoardId}
             setIsNewBoard={setIsNewBoard}
           />
-          {/* Remove for now */}
-          {/* <ThemeSwitcher /> */}
           <IconButton
             ml="6"
             aria-label={t('board.header.about')}

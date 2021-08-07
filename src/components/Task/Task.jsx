@@ -72,7 +72,7 @@ const Task = (props) => {
   const Preview = () => {
     return (
       <Flex justifyContent="space-between">
-        <Text>{task.content}</Text>
+        <Text fontWeight="bold">{task.content}</Text>
         <Flex flexDir="column" ml="3">
           <Tooltip label={t('task.tooltip.edit')} openDelay={500}>
             <EditIcon
@@ -100,7 +100,7 @@ const Task = (props) => {
 
   return (
     <Box
-      boxShadow="0 1px 8px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)"
+      // boxShadow="0 1px 8px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)"
       borderRadius="lg"
       overflow="hidden"
       p="3"
@@ -111,6 +111,7 @@ const Task = (props) => {
         editMode.content ? (
           <Flex justifyContent="space-between">
             <Textarea
+              fontWeight="bold"
               placeholder={t('task.placeholder.content')}
               value={content}
               onChange={onContentChange}

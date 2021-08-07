@@ -17,9 +17,10 @@ const TaskList = (props) => {
       overflow="hidden"
       borderRadius="lg"
       px="3"
-      pt="0"
+      py="3"
       mr="4"
       display="inline-table"
+      backgroundColor="#f8fafb"
     >
       <TaskListHeader id={id} boardId={boardId} isNew={isNew} />
       <TaskListContent id={id} />

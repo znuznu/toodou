@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import { IconButton, Tooltip, useColorModeValue } from '@chakra-ui/react';
+import {} from '@chakra-ui/react';
 
 import { addTaskToTaskList } from '../../actions/taskList.action';
 import { addTask } from '../../actions/task.action';
@@ -21,9 +22,6 @@ const selectNextTaskId = (state) => {
 const TaskAdd = (props) => {
   const { taskListId, setNewTaskId } = props;
 
-  const bgHover = useColorModeValue('gray.100', 'sith.700');
-  const colorHover = useColorModeValue('sith.900', '#F0F0F1');
-
   const dispatch = useDispatch();
 
   const lastTaskId = useSelector(
@@ -34,28 +32,24 @@ const TaskAdd = (props) => {
   const { t } = useTranslation();
 
   const onAddTask = () => {
-    dispatch(addTask('A beautiful task'));
+    dispatch(addTask());
     dispatch(addTaskToTaskList(taskListId, lastTaskId));
     setNewTaskId(lastTaskId);
   };
 
   return (
-    <Box
-      borderRadius="lg"
-      overflow="hidden"
-      p="3"
-      mb={3}
-      _hover={{ bg: bgHover, color: colorHover }}
-      cursor="pointer"
+    <IconButton
+      m="0 auto"
+      aria-label={t('task.add-button')}
+      display="flex"
+      w="100%"
       onClick={onAddTask}
-    >
-      <Flex>
-        <AddIcon my="auto" />
-        <Text my="auto" ml="2">
-          {t('task.add-button')}
-        </Text>
-      </Flex>
-    </Box>
+      icon={
+        <Tooltip label={t('task.add-button')} openDelay={500}>
+          <AddIcon />
+        </Tooltip>
+      }
+    />
   );
 };
 
